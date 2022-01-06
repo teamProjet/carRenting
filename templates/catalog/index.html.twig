@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CatalogController!{% endblock %}
+
+{% block body %}
+<div class="container_catalog">
+    {% for car in cars %}
+    <div class="card card_catalog">
+        <div class="card-body catalog_contentBx">
+            <h3 class="card-title h3_catalog">{{car.modele}}</h3>
+            <h2 class="card-text h2_catalog">{{car.prixParJour}} €/j</h2>
+            <a href="{{ path('catalog_show', { 'id': car.id }) }}" class="btn btn-primary catalog_loc">Voir plus</a>
+        </div>
+        <img src="{{car.img}}" style="width: 645px; height:200px;" alt="image de la voiture">
+    </div>
+    <h5>{{car.id}}</h5>
+    {% endfor %}
+</div>
+{% endblock %}
+

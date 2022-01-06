@@ -1,0 +1,172 @@
+{% extends 'base.html.twig' %}
+
+        
+{% block body %}
+
+{# Formulaire de reservation #}
+
+<div class="reservation">
+
+        <form method="POST">
+        <div>
+
+        <input type="text" placeholder="Adresse précise, gare, métro..." class="inputFirst"></input>
+
+        </div>
+
+        <div>
+
+        <input type="date" placeholder="Début" class="inputSecond"></input>
+        <input type="date" placeholder="Fin" class="inputThird"></input>
+
+        </div>
+
+        <button id="btn">Réserver</button>
+
+        </form>
+
+</div>
+
+{# ligne bleu décoration #}
+
+<hr class="line">
+
+{# Entête de selection de la voiture sur page d'accueil #}
+
+<div class="headCard">
+
+        <div class="textCard1">
+                <h2>Bienvenue Chez <span class="textCard2">Found My Car<span></h2>
+        </div>
+
+        <div class="disponibility">
+                <p> <i id="car" class="fas fa-car"></i> Disponible <span class="textCard2"> 4 en stock </span> <p>
+        </div>
+
+</div>
+
+{# Selection Nouveau ou Ancien #}
+
+<div class="headCardAuto">
+
+        <div class="new">
+        <p>Nouveautés</p>
+        </div>
+
+        <div class="old">
+        <p>Ancien</p>
+        </div>
+
+</div>
+
+{# HomePageCard #}
+
+<div class="homePageCard">
+
+        <div class="Card">
+                <div class="imgCard">
+                        <img alt="audiRs3" src="../Img/rs3.jpg" id="imgCard">
+                        <p>Audi RS3</p>
+                </div>
+        </div>
+
+         <div class="Card">
+                <div class="imgCard">
+                        <img alt="audiRs3" src="../Img/rs3.jpg" id="imgCard">
+                        <p>Audi RS3</p>
+                </div> 
+        </div>
+
+         <div class="Card">
+                <div class="imgCard">
+                        <img alt="audiRs3" src="../Img/rs3.jpg" id="imgCard">
+                        <p>Audi RS3</p>
+                </div>
+        </div>
+
+         <div class="Card">
+                <div class="imgCard">
+                        <img alt="audiRs3" src="../Img/rs3.jpg" id="imgCard">
+                        <p>Audi RS3</p>
+                </div>
+        </div>
+
+</div>
+
+<div class="homePageCard2">
+
+        <div class="Card">
+                <div class="imgCard">
+                        <img alt="audiRs3" src="../Img/meganeRs.jpg" id="imgCard">
+                        <p>Renault Megane RS</p>
+                </div>
+        </div>
+
+         <div class="Card">
+                <div class="imgCard">
+                        <img alt="audiRs3" src="../Img/meganeRs.jpg" id="imgCard">
+                        <p>Renault Megane RS</p>
+                </div> 
+        </div>
+
+         <div class="Card">
+                <div class="imgCard">
+                        <img alt="audiRs3" src="../Img/meganeRs.jpg" id="imgCard">
+                        <p>Renault Megane RS</p>
+                </div>
+        </div>
+
+         <div class="Card">
+                <div class="imgCard">
+                        <img alt="audiRs3" src="../Img/meganeRs.jpg" id="imgCard">
+                        <p>Renault Megane RS</p>
+                </div>
+        </div>
+
+</div>
+
+<div class="afterCard">
+
+        <div class="card1">
+
+                <h2 class="cardTitle">72 Mois</h2>
+                <hr class="borderTitle">
+
+                <button class="btnCard">En savoir plus</button>
+        </div>
+
+        <div class="card2">
+
+                <h2 class="cardTitle">2 ans</h2>
+                <hr class="borderTitle">
+
+                <button class="btnCard">En savoir plus</button>
+        </div>
+
+        <div class="card3">
+
+                <h2 class="cardTitle">4 ans et +</h2>
+                <hr class="borderTitle">
+
+                <button class="btnCard">En savoir plus</button>
+        </div>
+
+</div>
+
+<h2 class="graphicTitle">
+        Prix moyen journalier Mois par Mois
+</h2>
+
+<div class="allGraphic">
+        <div id="chartdiv"></div>
+</div>
+
+{# <div class="localMap">
+        <div id="map"></div>
+</div> #}
+
+
+
+
+{% endblock %}
+

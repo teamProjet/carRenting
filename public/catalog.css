@@ -41,6 +41,7 @@ body{background-color: black;}
     z-index: 1;
     max-width: 100%;
     
+    
 }
 .card_catalog:hover::before{
     top: -50%;
@@ -79,7 +80,7 @@ body{background-color: black;}
         padding-bottom: 0%;}
     .catalog_contentBx{position: relative;justify-content: left;}
     .card_catalog img {position: relative;}
-    .h3_catalog{font-size: 15px;}
+    .h3_catalog{font-size: 20px;}
     .catalog_loc, .catalog_loc:hover{width: auto;}
 }
 @media screen and (min-width: 1050px) {
@@ -89,6 +90,6 @@ body{background-color: black;}
         padding-bottom: 0%;}
     .catalog_contentBx{position: relative;justify-content: left;}
     .card_catalog img {position: relative;}
-    .h3_catalog{font-size: 15px;}
+    .h3_catalog{font-size: 20px;}
     .catalog_loc, .catalog_loc:hover{width: auto;}
 }

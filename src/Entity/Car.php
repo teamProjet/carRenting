@@ -42,7 +42,7 @@ class Car
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'car')]
     private $user;
 
-    #[ORM\OneToOne(inversedBy: 'car', targetEntity: contract::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'car', targetEntity: Contract::class, cascade: ['persist', 'remove'])]
     private $contract;
 
     #[ORM\OneToMany(mappedBy: 'car', targetEntity: Avis::class)]
@@ -50,6 +50,12 @@ class Car
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'car')]
     private $idUser;
+  
+    #[ORM\Column(type: 'string', length: 500)]
+    private $img;
+
+    #[ORM\Column(type: 'float')]
+    private $prixParJour;
 
     public function __construct()
     {
@@ -219,6 +225,27 @@ class Car
     public function setIdUser(?User $idUser): self
     {
         $this->idUser = $idUser;
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(string $img): self
+    {
+        $this->img = $img;
+
+        return $this;
+    }
+
+    public function getPrixParJour(): ?float
+    {
+        return $this->prixParJour;
+    }
+
+    public function setPrixParJour(float $prixParJour): self
+    {
+        $this->prixParJour = $prixParJour;
 
         return $this;
     }

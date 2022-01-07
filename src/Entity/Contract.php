@@ -40,6 +40,9 @@ class Contract
     #[ORM\ManyToOne(targetEntity: Admin::class, inversedBy: 'contract')]
     private $admin;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'contract')]
+    private $idUser;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -159,6 +162,18 @@ class Contract
     public function setAdmin(?Admin $admin): self
     {
         $this->admin = $admin;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
 
         return $this;
     }

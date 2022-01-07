@@ -6,59 +6,87 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
+      /**
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
+     */
+     /**
+     * @Assert\NotBlank
+     */
+    private $email;
+
+    #[ORM\Column(type: 'json')]
+    private $roles = [];
+
+    #[ORM\Column(type: 'string')]
+    /**
+     * @Assert\Length(
+     *      min = 8,
+     *      minMessage = "Your password must be at least {{ limit }} characters long",
+     * )
+     */
+    
+    private $password;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $nom;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $prenom;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $email;
-
-    #[ORM\Column(type: 'string', length: 255)]
+      /**
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 10,
+     *      minMessage = "Your login must be at least {{ limit }} characters long",
+     *      maxMessage = "Your login cannot be longer than {{ limit }} characters"
+     * )
+     */
     private $login;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $password;
-
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $rue;
 
-    #[ORM\Column(type: 'string', length: 5)]
+    #[ORM\Column(type: 'string', length: 5, nullable: true)]
     private $codePostal;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $ville;
 
-    #[ORM\Column(type: 'string', length: 15)]
+    #[ORM\Column(type: 'string', length: 15, nullable: true)]
     private $numeroPortable;
 
-    #[ORM\Column(type: 'string', length: 12)]
+    #[ORM\Column(type: 'string', length: 12, nullable: true)]
     private $numeroPermis;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: car::class)]
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: car::class)]
     private $car;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: avis::class)]
-    private $avis;
-
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: contract::class)]
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: contract::class)]
     private $contract;
+
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: avis::class)]
+    private $avis;
 
     public function __construct()
     {
         $this->car = new ArrayCollection();
-        $this->avis = new ArrayCollection();
         $this->contract = new ArrayCollection();
+        $this->avis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -66,12 +94,77 @@ class User
         return $this->id;
     }
 
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
     public function getNom(): ?string
     {
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->nom = $nom;
 
@@ -83,21 +176,9 @@ class User
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setPrenom(?string $prenom): self
     {
         $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
 
         return $this;
     }
@@ -114,24 +195,12 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
     public function getRue(): ?string
     {
         return $this->rue;
     }
 
-    public function setRue(string $rue): self
+    public function setRue(?string $rue): self
     {
         $this->rue = $rue;
 
@@ -143,7 +212,7 @@ class User
         return $this->codePostal;
     }
 
-    public function setCodePostal(string $codePostal): self
+    public function setCodePostal(?string $codePostal): self
     {
         $this->codePostal = $codePostal;
 
@@ -155,7 +224,7 @@ class User
         return $this->ville;
     }
 
-    public function setVille(string $ville): self
+    public function setVille(?string $ville): self
     {
         $this->ville = $ville;
 
@@ -167,7 +236,7 @@ class User
         return $this->numeroPortable;
     }
 
-    public function setNumeroPortable(string $numeroPortable): self
+    public function setNumeroPortable(?string $numeroPortable): self
     {
         $this->numeroPortable = $numeroPortable;
 
@@ -179,7 +248,7 @@ class User
         return $this->numeroPermis;
     }
 
-    public function setNumeroPermis(string $numeroPermis): self
+    public function setNumeroPermis(?string $numeroPermis): self
     {
         $this->numeroPermis = $numeroPermis;
 
@@ -198,7 +267,7 @@ class User
     {
         if (!$this->car->contains($car)) {
             $this->car[] = $car;
-            $car->setUser($this);
+            $car->setIdUser($this);
         }
 
         return $this;
@@ -208,38 +277,8 @@ class User
     {
         if ($this->car->removeElement($car)) {
             // set the owning side to null (unless already changed)
-            if ($car->getUser() === $this) {
-                $car->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|avis[]
-     */
-    public function getAvis(): Collection
-    {
-        return $this->avis;
-    }
-
-    public function addAvi(avis $avi): self
-    {
-        if (!$this->avis->contains($avi)) {
-            $this->avis[] = $avi;
-            $avi->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAvi(avis $avi): self
-    {
-        if ($this->avis->removeElement($avi)) {
-            // set the owning side to null (unless already changed)
-            if ($avi->getUser() === $this) {
-                $avi->setUser(null);
+            if ($car->getIdUser() === $this) {
+                $car->setIdUser(null);
             }
         }
 
@@ -258,7 +297,7 @@ class User
     {
         if (!$this->contract->contains($contract)) {
             $this->contract[] = $contract;
-            $contract->setUser($this);
+            $contract->setIdUser($this);
         }
 
         return $this;
@@ -268,8 +307,38 @@ class User
     {
         if ($this->contract->removeElement($contract)) {
             // set the owning side to null (unless already changed)
-            if ($contract->getUser() === $this) {
-                $contract->setUser(null);
+            if ($contract->getIdUser() === $this) {
+                $contract->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|avis[]
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis[] = $avi;
+            $avi->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getIdUser() === $this) {
+                $avi->setIdUser(null);
             }
         }
 

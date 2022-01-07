@@ -31,6 +31,9 @@ class Avis
     #[ORM\ManyToOne(targetEntity: car::class, inversedBy: 'avis')]
     private $car;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'avis')]
+    private $idUser;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +107,18 @@ class Avis
     public function setCar(?car $car): self
     {
         $this->car = $car;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
 
         return $this;
     }

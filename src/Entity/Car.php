@@ -48,6 +48,9 @@ class Car
     #[ORM\OneToMany(mappedBy: 'car', targetEntity: Avis::class)]
     private $avis;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'car')]
+    private $idUser;
+
     public function __construct()
     {
         $this->avis = new ArrayCollection();
@@ -204,6 +207,18 @@ class Car
                 $avi->setCar(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
 
         return $this;
     }

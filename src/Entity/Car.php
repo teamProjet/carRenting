@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CarRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
@@ -45,6 +47,20 @@ class Car
 
     #[ORM\Column(type: 'text')]
     private $commentaire;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'car')]
+    private $user;
+
+    #[ORM\OneToMany(mappedBy: 'car', targetEntity: Avis::class)]
+    private $avis;
+
+    #[ORM\OneToOne(inversedBy: 'car', targetEntity: Contract::class, cascade: ['persist', 'remove'])]
+    private $contract;
+
+    public function __construct()
+    {
+        $this->avis = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -179,6 +195,60 @@ class Car
     public function setCommentaire(string $commentaire): self
     {
         $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Avis[]
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis[] = $avi;
+            $avi->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getCar() === $this) {
+                $avi->setCar(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getContract(): ?Contract
+    {
+        return $this->contract;
+    }
+
+    public function setContract(?Contract $contract): self
+    {
+        $this->contract = $contract;
 
         return $this;
     }

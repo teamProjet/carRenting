@@ -31,6 +31,12 @@ class Contract
     #[ORM\Column(type: 'float')]
     private $prixLocation;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'contract')]
+    private $user;
+
+    #[ORM\OneToOne(mappedBy: 'contract', targetEntity: Car::class, cascade: ['persist', 'remove'])]
+    private $car;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +110,40 @@ class Contract
     public function setPrixLocation(float $prixLocation): self
     {
         $this->prixLocation = $prixLocation;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCar(): ?Car
+    {
+        return $this->car;
+    }
+
+    public function setCar(?Car $car): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($car === null && $this->car !== null) {
+            $this->car->setContract(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($car !== null && $car->getContract() !== $this) {
+            $car->setContract($this);
+        }
+
+        $this->car = $car;
 
         return $this;
     }

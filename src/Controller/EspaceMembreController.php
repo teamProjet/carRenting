@@ -12,9 +12,7 @@ use App\Entity\Contract;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\EspaceMembreType;
-
-
-
+use App\Repository\CarRepository;
 
 class EspaceMembreController extends AbstractController
 {   
@@ -39,12 +37,19 @@ class EspaceMembreController extends AbstractController
    
     #[Route('/supprimer/{id}', name: 'supprimer')]
    
-    public function delete(Request $request, EntityManagerInterface $entityManager, SessionInterface $session, ContractRepository $contractRepository, $id):Response
+    public function delete(
+        Request $request, 
+        EntityManagerInterface $entityManager, 
+        SessionInterface $session, 
+        ContractRepository $contractRepository, 
+        CarRepository $car, $id, 
+        ):Response
     {
-  
+        
        $contractRepository=$contractRepository->find($id);
-       
-        $form = $this->createForm(EspaceMembreType::class, $contractRepository);
+       $car = $car->findBy(['relation' => $id]);
+       echo $car;
+       $form = $this->createForm(EspaceMembreType::class, $contractRepository);
         
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -56,7 +61,8 @@ class EspaceMembreController extends AbstractController
         }return $this->render('espace_membre/supprimer.html.twig',[
             'session'  => $session,
             'form' => $form->createView(),
-            'contract'=>$contractRepository
+            'contract'=>$contractRepository,
+            'car'=>$car
             
         ]);
     }

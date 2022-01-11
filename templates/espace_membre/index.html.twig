@@ -4,12 +4,12 @@
 <h1>Bienvenue dans votre espace membre</h1>
 <p>Mes locations</p>
 {% for contract in contract %}
-{{contract.numeroContrat}}
-{{contract.debutContrat.format('d/m/Y')}}
-{{contract.finContrat.format('d/m/Y')}}
-{{contract.etatVehicule}}
-{{contract.caution}}
-{{contract.prixLocation}}
+<p>N° contrat :</p>{{contract.numeroContrat}}
+<p>Début de la location :</p>{{contract.debutContrat.format('d/m/Y')}}
+<p>Fin de la location :</p>{{contract.finContrat.format('d/m/Y')}}
+<p>Etat du véhicule :</p>{{contract.etatVehicule}}
+<p>Caution :</p>{{contract.caution}}
+<p>Prix de la location :</p>{{contract.prixLocation}}
 
 
 <a href="{{path('supprimer', {'id': contract.id})}}"><button type = "submit"> Supprimer ma réservation</button></a>

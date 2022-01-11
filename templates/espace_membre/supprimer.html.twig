@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Bienvenue dans votre espace membre</h1>
+<p>Etes-vous sûr de vouloir annuler la location {{contract.numeroContrat}}?</p>
+{{form(form)}}
+<a href="{{path('espace_membre')}}"><button>Retour vers mon espace membre</button></a>
+
+{% endblock %}

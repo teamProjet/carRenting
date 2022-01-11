@@ -25,10 +25,14 @@ class Avis
     #[ORM\Column(type: 'text')]
     private $commentaire;
 
+    #[ORM\Column(type: 'date')]
+    private $dateCreation;
+
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'avis')]
     private $user;
 
-    #[ORM\ManyToOne(targetEntity: car::class, inversedBy: 'avis')]
+    #[ORM\ManyToOne(targetEntity: Car::class, inversedBy: 'avis')]
+
     private $car;
 
     public function getId(): ?int
@@ -84,6 +88,18 @@ class Avis
         return $this;
     }
 
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(\DateTimeInterface $dateCreation): self
+    {
+        $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -96,12 +112,12 @@ class Avis
         return $this;
     }
 
-    public function getCar(): ?car
+    public function getCar(): ?Car
     {
         return $this->car;
     }
 
-    public function setCar(?car $car): self
+    public function setCar(?Car $car): self
     {
         $this->car = $car;
 

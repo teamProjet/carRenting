@@ -13,14 +13,17 @@ class Contract
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 12)]
+    #[ORM\Column(type: 'string', length: 255)]
     private $numeroContrat;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: 'date')]
     private $debutContrat;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: 'date')]
     private $finContrat;
+
+    #[ORM\Column(type: 'text')]
+    private $etatVehicule;
 
     #[ORM\Column(type: 'float')]
     private $caution;
@@ -28,17 +31,11 @@ class Contract
     #[ORM\Column(type: 'float')]
     private $prixLocation;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $remarquesVehicule;
-
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'contract')]
     private $user;
 
     #[ORM\OneToOne(mappedBy: 'contract', targetEntity: Car::class, cascade: ['persist', 'remove'])]
     private $car;
-
-    #[ORM\ManyToOne(targetEntity: Admin::class, inversedBy: 'contract')]
-    private $admin;
 
     public function getId(): ?int
     {
@@ -81,6 +78,18 @@ class Contract
         return $this;
     }
 
+    public function getEtatVehicule(): ?string
+    {
+        return $this->etatVehicule;
+    }
+
+    public function setEtatVehicule(string $etatVehicule): self
+    {
+        $this->etatVehicule = $etatVehicule;
+
+        return $this;
+    }
+
     public function getCaution(): ?float
     {
         return $this->caution;
@@ -101,18 +110,6 @@ class Contract
     public function setPrixLocation(float $prixLocation): self
     {
         $this->prixLocation = $prixLocation;
-
-        return $this;
-    }
-
-    public function getRemarquesVehicule(): ?string
-    {
-        return $this->remarquesVehicule;
-    }
-
-    public function setRemarquesVehicule(string $remarquesVehicule): self
-    {
-        $this->remarquesVehicule = $remarquesVehicule;
 
         return $this;
     }
@@ -147,18 +144,6 @@ class Contract
         }
 
         $this->car = $car;
-
-        return $this;
-    }
-
-    public function getAdmin(): ?Admin
-    {
-        return $this->admin;
-    }
-
-    public function setAdmin(?Admin $admin): self
-    {
-        $this->admin = $admin;
 
         return $this;
     }

@@ -15,7 +15,6 @@ class IndexController extends AbstractController
             'controller_name' => 'IndexController',
         ]);
     }
-
     #[Route('/reg', name: 'registration')]
     public function registration(): Response
     {
@@ -31,5 +30,4 @@ class IndexController extends AbstractController
             'controller_name' => 'IndexController',
         ]);
     }
-
 }

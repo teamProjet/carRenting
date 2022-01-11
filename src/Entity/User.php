@@ -6,88 +6,99 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
+
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $nom;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $prenom;
-
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
+    /**
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
+     */
+     /**
+     * @Assert\NotBlank
+     */
     private $email;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $login;
+    #[ORM\Column(type: 'json')]
+    private $roles = [];
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string')]
+     /**
+     * @Assert\Length(
+     *      min = 8,
+     *      minMessage = "Votre mot de passe doit contenir au moins {{ limit }} caractères",
+     * )
+     */
     private $password;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $rue;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $nom;
 
-    #[ORM\Column(type: 'string', length: 5)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $prenom;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+      /**
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 10,
+     *      minMessage = "Your login must be at least {{ limit }} characters long",
+     *      maxMessage = "Your login cannot be longer than {{ limit }} characters"
+     * )
+     */
+    private $login;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $numeroRue;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $nomdeRue;
+
+    #[ORM\Column(type: 'string', length: 5, nullable: true)]
     private $codePostal;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $ville;
 
-    #[ORM\Column(type: 'string', length: 15)]
+    #[ORM\Column(type: 'string', length: 15, nullable: true)]
     private $numeroPortable;
 
-    #[ORM\Column(type: 'string', length: 12)]
-    private $numeroPermis;
+    #[ORM\Column(type: 'string', length: 12, nullable: true)]
+    private $numeroPermisConduire;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: car::class)]
-    private $car;
+    #[ORM\Column(type: 'date', nullable: true)]
+    private $annee;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: avis::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avis::class)]
     private $avis;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: contract::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Car::class)]
+    private $car;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Contract::class)]
     private $contract;
 
     public function __construct()
     {
-        $this->car = new ArrayCollection();
         $this->avis = new ArrayCollection();
+        $this->car = new ArrayCollection();
         $this->contract = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -98,23 +109,42 @@ class User
     public function setEmail(string $email): self
     {
         $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
 
-    public function getLogin(): ?string
-    {
-        return $this->login;
-    }
-
-    public function setLogin(string $login): self
-    {
-        $this->login = $login;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -126,15 +156,69 @@ class User
         return $this;
     }
 
-    public function getRue(): ?string
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
     {
-        return $this->rue;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
-    public function setRue(string $rue): self
+    public function getNom(): ?string
     {
-        $this->rue = $rue;
+        return $this->nom;
+    }
 
+    public function setNom(?string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(?string $prenom): self
+    {
+        $this->prenom = $prenom;
+        return $this;
+    }
+
+    public function getLogin(): ?string
+    {
+        return $this->login;
+    }
+
+    public function setLogin(?string $login): self
+    {
+        $this->login = $login;
+
+        return $this;
+    }
+
+    public function getNumeroRue(): ?string
+    {
+        return $this->numeroRue;
+    }
+
+    public function setNumeroRue(?string $numeroRue): self
+    {
+        $this->numeroRue = $numeroRue;
+        return $this;
+    }
+
+    public function getNomdeRue(): ?string
+    {
+        return $this->nomdeRue;
+    }
+
+    public function setNomdeRue(?string $nomdeRue): self
+    {
+        $this->nomdeRue = $nomdeRue;
         return $this;
     }
 
@@ -143,7 +227,7 @@ class User
         return $this->codePostal;
     }
 
-    public function setCodePostal(string $codePostal): self
+    public function setCodePostal(?string $codePostal): self
     {
         $this->codePostal = $codePostal;
 
@@ -155,7 +239,7 @@ class User
         return $this->ville;
     }
 
-    public function setVille(string $ville): self
+    public function setVille(?string $ville): self
     {
         $this->ville = $ville;
 
@@ -167,64 +251,45 @@ class User
         return $this->numeroPortable;
     }
 
-    public function setNumeroPortable(string $numeroPortable): self
+    public function setNumeroPortable(?string $numeroPortable): self
     {
         $this->numeroPortable = $numeroPortable;
 
         return $this;
     }
 
-    public function getNumeroPermis(): ?string
+    public function getNumeroPermisConduire(): ?string
     {
-        return $this->numeroPermis;
+        return $this->numeroPermisConduire;
     }
 
-    public function setNumeroPermis(string $numeroPermis): self
+    public function setNumeroPermisConduire(?string $numeroPermisConduire): self
     {
-        $this->numeroPermis = $numeroPermis;
+        $this->numeroPermisConduire = $numeroPermisConduire;
 
+        return $this;
+    }
+
+    public function getAnnee(): ?\DateTimeInterface
+    {
+        return $this->annee;
+    }
+
+    public function setAnnee(?\DateTimeInterface $annee): self
+    {
+        $this->annee = $annee;
         return $this;
     }
 
     /**
-     * @return Collection|car[]
-     */
-    public function getCar(): Collection
-    {
-        return $this->car;
-    }
-
-    public function addCar(car $car): self
-    {
-        if (!$this->car->contains($car)) {
-            $this->car[] = $car;
-            $car->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCar(car $car): self
-    {
-        if ($this->car->removeElement($car)) {
-            // set the owning side to null (unless already changed)
-            if ($car->getUser() === $this) {
-                $car->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|avis[]
+     * @return Collection|Avis[]
      */
     public function getAvis(): Collection
     {
         return $this->avis;
     }
 
-    public function addAvi(avis $avi): self
+    public function addAvi(Avis $avi): self
     {
         if (!$this->avis->contains($avi)) {
             $this->avis[] = $avi;
@@ -234,7 +299,7 @@ class User
         return $this;
     }
 
-    public function removeAvi(avis $avi): self
+    public function removeAvi(Avis $avi): self
     {
         if ($this->avis->removeElement($avi)) {
             // set the owning side to null (unless already changed)
@@ -247,14 +312,44 @@ class User
     }
 
     /**
-     * @return Collection|contract[]
+     * @return Collection|Car[]
+     */
+    public function getCar(): Collection
+    {
+        return $this->car;
+    }
+
+    public function addCar(Car $car): self
+    {
+        if (!$this->car->contains($car)) {
+            $this->car[] = $car;
+            $car->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCar(Car $car): self
+    {
+        if ($this->car->removeElement($car)) {
+            // set the owning side to null (unless already changed)
+            if ($car->getUser() === $this) {
+                $car->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Contract[]
      */
     public function getContract(): Collection
     {
         return $this->contract;
     }
 
-    public function addContract(contract $contract): self
+    public function addContract(Contract $contract): self
     {
         if (!$this->contract->contains($contract)) {
             $this->contract[] = $contract;
@@ -264,7 +359,7 @@ class User
         return $this;
     }
 
-    public function removeContract(contract $contract): self
+    public function removeContract(Contract $contract): self
     {
         if ($this->contract->removeElement($contract)) {
             // set the owning side to null (unless already changed)

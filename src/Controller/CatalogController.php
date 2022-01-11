@@ -21,11 +21,10 @@ class CatalogController extends AbstractController
     #[Route('/catalog', name: 'catalog')]
     public function catalog(CarRepository $carRepository): Response
     {
-        
-        
         return $this->render('catalog/index.html.twig', [
             'cars' => $carRepository->findAll(),
         ]);
     }
-    
+
 }
+

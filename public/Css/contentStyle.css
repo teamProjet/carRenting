@@ -236,16 +236,6 @@ form {
     margin-left: 70px;
 }
 
-.localMap{
-    width: 100%;
-    height: 600px;
-    background-color: #383A3F;
-}
-
-#map{
-    height: 100%;
-}
-
 /* Partie responsive */
 
 @media screen and (max-width: 920px){

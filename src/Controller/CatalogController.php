@@ -14,7 +14,7 @@ class CatalogController extends AbstractController
     public function showCar(Car $car): Response
     {
         return $this->render('catalog/car.html.twig',[
-            "car" => $car,          
+            "car" => $car,
         ]);
     }
 
@@ -25,4 +25,6 @@ class CatalogController extends AbstractController
             'cars' => $carRepository->findAll(),
         ]);
     }
+
 }
+

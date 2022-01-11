@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
+
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -108,7 +109,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -185,7 +185,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPrenom(?string $prenom): self
     {
         $this->prenom = $prenom;
-
         return $this;
     }
 
@@ -209,7 +208,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNumeroRue(?string $numeroRue): self
     {
         $this->numeroRue = $numeroRue;
-
         return $this;
     }
 
@@ -221,7 +219,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNomdeRue(?string $nomdeRue): self
     {
         $this->nomdeRue = $nomdeRue;
-
         return $this;
     }
 
@@ -281,7 +278,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAnnee(?\DateTimeInterface $annee): self
     {
         $this->annee = $annee;
-
         return $this;
     }
 

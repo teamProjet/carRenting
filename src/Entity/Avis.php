@@ -32,6 +32,7 @@ class Avis
     private $user;
 
     #[ORM\ManyToOne(targetEntity: Car::class, inversedBy: 'avis')]
+
     private $car;
 
     public function getId(): ?int

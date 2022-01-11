@@ -88,6 +88,7 @@ class Car
     {
         $this->image = $image;
 
+
         return $this;
     }
 

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="reg">
+
+    <div id="formConnexion">
+
+    <h1 class="formTitleCi"> Se connecter </h1>
+
+
+    <form id="connexion">
+        <label><label>
+            <br>
+            <input type="text" placeholder="Email" class="inputInscription"></input>
+            <br>
+            <label><label>
+            <br>
+            <input type="text" placeholder="Mot de Passe" class="inputInscription"></input>
+            <br>
+            <br>
+            <a href="{{path('registration')}}" id="lienCo">Vous n'avez pas de compte ? S'inscrire</a>
+            <br>
+            <br>
+            <button class="formBtn">Se connecter</button>
+            
+            
+    </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

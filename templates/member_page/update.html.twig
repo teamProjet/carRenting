@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace membre{% endblock %}
+
+{% block body %}
+
+<div class="reg">
+
+    <div class="update">
+
+        <div class="updateAvatar">
+            <img src="{{asset("../../Img/avatarHead.png")}}" alt="#" >
+        </div>
+
+        <div class="updateInfo">
+
+            <h1>Mr Inconnu</h1>
+
+            <h3>Membre depuis le 24/02/2021</h3>
+
+            <h4>4 Locations</h4>
+
+        </div>
+
+        <div class="updateForm">
+
+            <form id="inscription">
+            <label><label>
+            <br>
+            <input type="text" placeholder="Email" class="inputUpdate"></input>
+            <br>
+            <label><label>
+            <br>
+            <input type="text" placeholder="Login" class="inputUpdate"></input>
+            <br>
+            <label><label>
+            <br>
+            <input type="text" placeholder="Mot de Passe" class="inputUpdate"></input>
+            <br>
+            <label><label>
+            <br>
+            <br>
+            <button class="updateFormBtn">Modifier</button>
+        </form>
+
+
+        </div>
+
+        <div class="updateBack">
+
+        <button onclick="window.location.href = '{{path('member_page')}}';" class="updateBackBtn"><i class="fas fa-arrow-left"></i></button>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

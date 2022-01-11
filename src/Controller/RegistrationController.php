@@ -48,7 +48,7 @@ class RegistrationController extends AbstractController
                                 }else{
                                     $entityManager->persist($user);
                                     $entityManager->flush();
-                                    //return $this->redirectToRoute('home');
+                                  
                                     }   
                 
                         }
@@ -58,7 +58,8 @@ class RegistrationController extends AbstractController
                 echo " Le compte associé à l'adresse $userEmail existe déjà.";
             }
         }return $this->render('registration/index.html.twig', [
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                
             ]); 
             }
     

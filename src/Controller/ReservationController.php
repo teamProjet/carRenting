@@ -9,7 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
+use App\Entity\Contract;
 use App\Form\ReservationType;
+use App\Repository\CarRepository;
 use App\Repository\UserRepository;
 
 
@@ -21,16 +23,22 @@ class ReservationController extends AbstractController
     {
         $this->requestStack = $request;
     }
-    #[Route('/reservation', name: 'reservation')]
+    #[Route('/reservation/{id}', name: 'reservation')]
 
   
     public function reservation(
         Request $request, 
         EntityManagerInterface $entityManager, 
         UserRepository $userRepository,
+        Contract $contract
+   
+        
+        
     ):Response
     {
         $user = new User();
+        
+        $contract =new Contract;
             $form = $this->createForm(ReservationType::class, $user);
             $form->handleRequest($request);
                  if ($form->isSubmitted() && $form->isValid())
@@ -53,7 +61,8 @@ class ReservationController extends AbstractController
                         }
                     }
                 return $this->render('reservation/index.html.twig', [
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
+                    
                 ]);             
     }
     
@@ -94,6 +103,6 @@ class ReservationController extends AbstractController
                 return true;
     }
 
-            
+    
            
 }

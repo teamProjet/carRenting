@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EspaceMembreController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<h1>Bienvenue dans votre espace membre</h1>
+<p>Mes locations</p>
+{% for contract in contract %}
+<p>N° contrat :</p>{{contract.numeroContrat}}
+<p>Début de la location :</p>{{contract.debutContrat.format('d/m/Y')}}
+<p>Fin de la location :</p>{{contract.finContrat.format('d/m/Y')}}
+<p>Etat du véhicule :</p>{{contract.etatVehicule}}
+<p>Caution :</p>{{contract.caution}}
+<p>Prix de la location :</p>{{contract.prixLocation}}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/kahlaoui/Desktop/carRenting/src/Controller/EspaceMembreController.php'|file_link(0) }}">src/Controller/EspaceMembreController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/kahlaoui/Desktop/carRenting/templates/espace_membre/index.html.twig'|file_link(0) }}">templates/espace_membre/index.html.twig</a></code></li>
-    </ul>
-</div>
+<a href="{{path('supprimer', {'id': contract.id})}}"><button type = "submit"> Supprimer ma réservation</button></a>
+
+<button type = "submit"> Modifier ma réservation</button></br>
+<button type = "submit"> Télécharger mon contrat</button></br>
+{% endfor %}
 {% endblock %}

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\UserType;
+use App\Form\ModificationType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,19 +16,28 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
 class ModificationController extends AbstractController
-{
-    #[Route('/modification', name: 'modification')]
+{   
+    protected $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+    #[Route('/modification{id}', name: 'modification')]
     public function modification( Request $request, 
     EntityManagerInterface $entityManager, 
     UserRepository $userRepository, 
+    $email
    ): Response
-    {   $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+    {   
+        $user=new User;
+        $userRepository=$userRepository->find($email);
+        
+        $form = $this->createForm(ModificationType::class, $email);
         $form->handleRequest($request);
              if ($form->isSubmitted() && $form->isValid())
             {
-                if($this->isEmailExist($user->getEmail(), $userRepository)===true)
-                        {
+                
                             $password=$user->getPassword();
                             if ($this->checkPassword($password) != true)
                                 {
@@ -35,11 +45,12 @@ class ModificationController extends AbstractController
                                 }else{
                                     $entityManager->persist($user);
                                     $entityManager->flush();
-                                    //return $this->redirectToRoute('home');
+                                    
                                     }   
                         }
-                    }return $this->render('modification/index.html.twig', [
+                    return $this->render('modification/index.html.twig', [
                         'form' => $form->createView()
+                        
                     ]); 
                 }
         protected function checkPassword($password):bool
@@ -55,13 +66,6 @@ class ModificationController extends AbstractController
                             return true;
                              
         }
-        protected function isEmailExist(string $emailUser, UserRepository $userRepository):bool
-        {
-            $databaseEmail=$userRepository->findOneBy(['email' => $emailUser]);
-            if(!empty($databaseEmail))
-            {
-                return true;
-            }return false;
-        }
+        
       
 }

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace membre{% endblock %}
+
+{% block body %}
+
+<div class="allProfil">
+
+    <div class="headProfil">
+
+        <div class="leftHeadProfil">
+            <img src="{{asset("../../Img/avatarHead.png")}}" alt="#" >
+        </div>
+
+        <div class="rightHeadProfil">
+
+            <div class="topHeadProfil">
+        
+                <h2>Mr Inconnu</h2>
+
+                <h4>Membre depuis le 24/01/2020</h4>
+
+                <h4>4 locations</h4>
+
+            </div>
+
+            <div class="profilLine">
+                <hr  class="profilLine2">
+            </div>
+
+            <div class="bottomHeadProfil">
+                <div class="star">
+                    <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
+                    <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
+                    <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
+                    <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
+                    <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
+                    {# <img src="{{asset("../../Img/starGrey.png")}}" alt="#">
+                    <img src="{{asset("../../Img/starGrey.png")}}" alt="#">
+                    <img src="{{asset("../../Img/starGrey.png")}}" alt="#">
+                    <img src="{{asset("../../Img/starGrey.png")}}" alt="#">
+                    <img src="{{asset("../../Img/starGrey.png")}}" alt="#"> #}
+                </div>
+
+                <div class="btnMoreRate">
+                    <button onclick="window.location.href = '{{path('memberRate_page')}}';" class="moreRate">Voir plus</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="bottomProfil">
+            <button onclick="window.location.href = '{{path('memberReservation_page')}}';" class="btnBottomProfil">Mes Reservations</button>
+    </div>
+
+    <div class="bottomProfil">
+            <button onclick="window.location.href = '{{path('memberUpdate_page')}}';" class="btnBottomProfil">Modifier mon identité</button>
+    </div>
+
+    <div class="disconnect">
+        <button class="btnDisconnect">Se déconnecter</button>
+    </div>
+
+</div>
+{% endblock %}

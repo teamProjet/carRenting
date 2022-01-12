@@ -46,32 +46,22 @@
 		<li><a class="hover-underline-animation" href="#">Mes Locations</a></li>
 		<li><a class="hover-underline-animation" href="#">À Propos</a></li>
 	</ul>
-		
+	
+	
 	<div class="right">
+		{# <button onclick="window.location.href = '{{path('connexion')}}';" class="navbarBtn">Connexion</button> #}
 
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
-		   <div class="hoverLogo">
+    <div class="hoverLogo">
             <a href="{{path('member_page')}}">
                 <i id="userLogo"class="fas fa-user"></i>
             </a>
 
             <div class="dropdown">
 
-            <form action="/logout">
-
-                <button class="hoverDropdown" >Se déconnecter</button>
-
-            </form>
+                <button class="hoverDropdown">Se déconnecter</button>
 
             </div>
     </div>
-        
-    {% else %}
-
-        <button onclick="window.location.href = '{{path('login')}}';" class="navbarBtn">Connexion</button>
-
-    {% endif %}
 
 	</div>
 	

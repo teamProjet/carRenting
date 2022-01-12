@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
+
+
 {% block title %}Espace membre{% endblock %}
 
 {% block body %}
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
 <div class="allProfil">
 
@@ -16,7 +20,7 @@
 
             <div class="topHeadProfil">
         
-                <h2>Mr Inconnu</h2>
+                <h2>{{ app.user.email }}</h2>
 
                 <h4>Membre depuis le 24/01/2020</h4>
 
@@ -60,8 +64,18 @@
     </div>
 
     <div class="disconnect">
-        <button class="btnDisconnect">Se déconnecter</button>
+
+    <form action="/logout">
+        <button onclick="window.location.href = '{{path('login')}}';" class="btnDisconnect">Se déconnecter</button>
+    </form>
     </div>
 
 </div>
+
+{% else %}
+
+    <script>window.location.href = '{{path('login')}}';</script>
+
+{% endif %}
+
 {% endblock %}

@@ -47,7 +47,8 @@
 }
 
 .star img{
-    width: 50px;
+    margin-top: 10px;
+    width: 40px;
     color: blue;
 }
 
@@ -205,6 +206,24 @@
     width: 20%;
     padding: 10px;
     color:white;
+}
+
+.updateBackBtn2{
+
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 80%;
+    height: 45%;
+    /* padding: 10px; */
+    color:black;
+}
+
+.updateBackBtn2:hover{
+    background-color: white;
+    border: 1px solid black;
+    color:red;
+    width: 100%;
 }
 
 .updateBackBtn:hover{

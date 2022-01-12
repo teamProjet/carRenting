@@ -4,6 +4,8 @@
 
 {% block body %}
 
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
 <div class="reg">
 
     <div class="update">
@@ -14,7 +16,7 @@
 
         <div class="updateInfo">
 
-            <h1>Mr Inconnu</h1>
+            <h1>{{ app.user.email }}</h1>
 
             <h3>Membre depuis le 24/02/2021</h3>
 
@@ -55,5 +57,11 @@
     </div>
 
 </div>
+
+{% else %}
+
+    <script>window.location.href = '{{path('login')}}';</script>
+
+{% endif %}
 
 {% endblock %}

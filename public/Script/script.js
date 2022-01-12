@@ -164,6 +164,9 @@ entete.querySelector('.old').addEventListener('click',()=>{
 	ancien.style.background = 'white'
 	ancien.style.color = 'black'
 	imageNone.style.display = 'flex'
+	nouveau.style.cursor = 'pointer'
+	ancien.style.cursor = 'auto'
+
 }
 )
 
@@ -175,5 +178,44 @@ entete.querySelector('.new').addEventListener('click',()=>{
 	ancien.style.color = 'rgba(255, 255, 255, 0.63)'
 	imageNone.style.display = 'none'
 	image.transition = 'ease-out'
+	ancien.style.cursor = 'pointer'
+	nouveau.style.cursor = 'auto'
+
+}
+)
+
+const resaTop = document.querySelector('.resaTop') //entete
+
+const image2 = document.querySelector('resaContent') // image
+
+const allResa = document.querySelector('.allResa') //nouveau
+
+const modSupp = document.querySelector('.modSupp') //ancien
+
+const imageNone2 = document.querySelector('.resModSupp') // imagenone
+
+resaTop.querySelector('.modSupp').addEventListener('click',()=>{
+	image2.style.display = 'none'
+	allResa.style.background = 'rgba(255, 255, 255, 0.06)'
+	allResa.style.color = 'rgba(255, 255, 255, 0.63)'
+	modSupp.style.background = 'white'
+	modSupp.style.color = 'black'
+	imageNone2.style.display = 'flex'
+	allResa.style.cursor = 'pointer'
+	modSupp.style.cursor = 'auto'
+}
+)
+
+resaTop.querySelector('.allResa').addEventListener('click',()=>{
+	image.style.display = 'flex'
+	allResa.style.background = 'white'
+	allResa.style.color = 'black'
+	modSupp.style.background = 'rgba(255, 255, 255, 0.06)'
+	modSupp.style.color = 'rgba(255, 255, 255, 0.63)'
+	imageNone2.style.display = 'none'
+	image.transition = 'ease-out'
+	modSupp.style.cursor = 'pointer'
+	allResa.style.cursor = 'auto'
+
 }
 )

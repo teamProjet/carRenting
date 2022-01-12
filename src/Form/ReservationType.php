@@ -15,10 +15,7 @@ class ReservationType extends AbstractType
            
             ->add('nom')
             ->add('prenom')
-<<<<<<< HEAD
-=======
             ->add('email')
->>>>>>> 3b0fb3142c5741e9a8998975538816164097ae2d
             ->add('NumeroRue')
             ->add('NomDeRue')
             ->add('codePostal')

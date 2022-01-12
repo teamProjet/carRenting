@@ -58,8 +58,7 @@ class RegistrationController extends AbstractController
                 echo " Le compte associé à l'adresse $userEmail existe déjà.";
             }
         }return $this->render('registration/index.html.twig', [
-                'form' => $form->createView(),
-                
+                'form' => $form->createView()
             ]); 
             }
     

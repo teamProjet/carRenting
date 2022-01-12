@@ -43,7 +43,7 @@ class Car
     private $essence;
 
     #[ORM\Column(type: 'integer')]
-    private $disponibilité;
+    private $disponibilite;
 
     #[ORM\Column(type: 'text')]
     private $commentaire;
@@ -87,7 +87,6 @@ class Car
     public function setImage(string $image): self
     {
         $this->image = $image;
-
 
         return $this;
     }
@@ -176,14 +175,14 @@ class Car
         return $this;
     }
 
-    public function getDisponibilité(): ?int
+    public function getDisponibilite(): ?int
     {
-        return $this->disponibilité;
+        return $this->disponibilite;
     }
 
-    public function setDisponibilité(int $disponibilité): self
+    public function setDisponibilite(int $disponibilite): self
     {
-        $this->disponibilité = $disponibilité;
+        $this->disponibilite = $disponibilite;
 
         return $this;
     }

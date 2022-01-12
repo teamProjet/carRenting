@@ -44,18 +44,20 @@ class RegistrationController extends AbstractController
                             echo " password= $password";
                             if ($this->checkPassword($password) != true)
                                 {
-	                                echo "le mot de passe n'est pas au format requis. Il doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre.";	
+	                                // echo "le mot de passe n'est pas au format requis. Il doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre.";	
                                 }else{
                                     $entityManager->persist($user);
                                     $entityManager->flush();
                                   
-                                    }   
+                                    }  
+                            
+                                    return $this->redirectToRoute('index');
                 
                         }
             
             else{
                 $userEmail=$user->getEmail();
-                echo " Le compte associé à l'adresse $userEmail existe déjà.";
+                // echo " Le compte associé à l'adresse $userEmail existe déjà.";
             }
         }return $this->render('registration/index.html.twig', [
                 'form' => $form->createView()

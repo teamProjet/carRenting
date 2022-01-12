@@ -5,18 +5,28 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <form action="{{ path('login') }}" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+<div class="reg">
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password"/>
+    <div id="formConnexion">
 
-        {# If you want to control the URL the user is redirected to on success
-        <input type="hidden" name="_target_path" value="/account"/> #}
+        <h1 class="formTitleCi"> Se connecter </h1>
 
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-        <button type="submit">login</button>
-    </form>
+        <form id="connexion" action="{{ path('login') }}" method="post">
+            <label></label>
+            <br>
+            <input type="text" class="inputInscription" id="username" name="_username" value="{{ last_username }}" placeholder="Email" required/>
+            <br>
+            <label></label>
+            <br>
+            <input type="password" class="inputInscription" id="password" name="_password" placeholder="Mot de Passe" required/>
+            <br>
+            <br>
+            <a href="{{path('inscription')}}" id="lienCo">Vous n'avez pas de compte ? S'inscrire</a>
+            <br>
+            <br>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <button class="formBtn" type="submit">Se connecter</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

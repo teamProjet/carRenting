@@ -1,11 +1,29 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+
+<div class="reg">
+
+    <div id="formInscription">
+
+        <h1 class="formTitleCi"> S'inscrire </h1>
    
 {{ form_start(form) }}
-{{ form_row(form.email) }}
+{{ form_row(form.email)}}
+<br>
 {{ form_row(form.password.first) }}
+<br>
 {{ form_row(form.password.second) }}
-<button type='submit'>Inscription</button>
+<br>
+<br>
+<a href="{{path('login')}}" id="lienCo">Vous avez déjà un compte ? Se connecter</a>
+<br>
+<br>
+<button class="formBtn" type='submit'>Inscription</button>
 {{ form_end(form) }}
+
+
+    </div>
+
+</div>
 
 {% endblock %}

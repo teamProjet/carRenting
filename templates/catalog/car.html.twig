@@ -4,6 +4,9 @@
 
 {% block body %}
 <div class="container">
-    <h1 style="color: white;">{{car.id}}</h1>
+    <h1>{{car.id}}</h1>
+    <p>{{car.marque}}</p>
+    <p>{{car.modele}}</p>
+    <img src="../{{car.image}}" style="width: 645px; height:200px;" alt="image de la voiture">
 </div>
 {% endblock %}

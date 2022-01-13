@@ -4,17 +4,11 @@
 
 {% block body %}
 <input type="search" onkeyup="search_car()" name="search" id="searchbar" placeholder="Search cars..">
-
-<label style="color: aliceblue;" for="price">Select Price (0-1000)</label>
-<input id="pricing" type="range" min="0" max="1000"/>
-
-
 <div class="container_catalog">
     {% for car in cars %}
     <div class="card card_catalog">
         <div class="card-body catalog_contentBx">
-            <h3 class="card-title h3_catalog">{{car.modele}}
-            </h3>
+            <h3 class="card-title h3_catalog">{{car.marque}} {{car.modele}}</h3>
             <h2 class="card-text h2_catalog">{{car.tarifJournee}} €/j</h2>
             <a href="{{ path('catalog_show', { 'id': car.id }) }}" class="btn btn-primary catalog_loc">Voir plus</a>
         </div>

@@ -25,6 +25,4 @@ class CatalogController extends AbstractController
             'cars' => $carRepository->findAll(),
         ]);
     }
-
 }
-

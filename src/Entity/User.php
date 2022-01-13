@@ -76,7 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 12, nullable: true)]
     private $numeroPermisConduire;
 
-    #[ORM\Column(type: 'date', nullable: true)]
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private $annee;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avis::class)]
@@ -269,12 +269,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAnnee(): ?\DateTimeInterface
+    public function getAnnee(): ?\DateTimeImmutable
     {
         return $this->annee;
     }
 
-    public function setAnnee(?\DateTimeInterface $annee): self
+    public function setAnnee(?\DateTimeImmutable $annee): self
     {
         $this->annee = $annee;
         return $this;

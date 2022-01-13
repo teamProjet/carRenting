@@ -16,10 +16,10 @@ class Contract
     #[ORM\Column(type: 'string', length: 255)]
     private $numeroContrat;
 
-    #[ORM\Column(type: 'date')]
+    #[ORM\Column(type: 'datetime_immutable')]
     private $debutContrat;
 
-    #[ORM\Column(type: 'date')]
+    #[ORM\Column(type: 'datetime_immutable')]
     private $finContrat;
 
     #[ORM\Column(type: 'text')]
@@ -54,24 +54,24 @@ class Contract
         return $this;
     }
 
-    public function getDebutContrat(): ?\DateTimeInterface
+    public function getDebutContrat(): ?\DateTimeImmutable
     {
         return $this->debutContrat;
     }
 
-    public function setDebutContrat(\DateTimeInterface $debutContrat): self
+    public function setDebutContrat(\DateTimeImmutable $debutContrat): self
     {
         $this->debutContrat = $debutContrat;
 
         return $this;
     }
 
-    public function getFinContrat(): ?\DateTimeInterface
+    public function getFinContrat(): ?\DateTimeImmutable
     {
         return $this->finContrat;
     }
 
-    public function setFinContrat(\DateTimeInterface $finContrat): self
+    public function setFinContrat(\DateTimeImmutable $finContrat): self
     {
         $this->finContrat = $finContrat;
 

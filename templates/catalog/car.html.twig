@@ -5,5 +5,16 @@
 {% block body %}
 <div class="container">
     <h1 style="color: white;">{{car.id}}</h1>
+    <p style="color: white;">{{car.marque}}</p>
+    <p style="color: white;">{{car.modele}}</p>
+    <p style="color: white;">{{car.couleur}}</p>
+    <img src="../{{car.image}}" style="width: 645px; height:200px;" alt="image de la voiture">
 </div>
+
+
+{# 
+<p>{{carAvis}}</p>
+<p>{{carId}}</p> #}
+
+        
 {% endblock %}

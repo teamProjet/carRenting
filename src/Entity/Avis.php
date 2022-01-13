@@ -25,7 +25,7 @@ class Avis
     #[ORM\Column(type: 'text')]
     private $commentaire;
 
-    #[ORM\Column(type: 'date')]
+    #[ORM\Column(type: 'datetime_immutable')]
     private $dateCreation;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'avis')]
@@ -87,12 +87,12 @@ class Avis
         return $this;
     }
 
-    public function getDateCreation(): ?\DateTimeInterface
+    public function getDateCreation(): ?\DateTimeImmutable
     {
         return $this->dateCreation;
     }
 
-    public function setDateCreation(\DateTimeInterface $dateCreation): self
+    public function setDateCreation(\DateTimeImmutable $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
 

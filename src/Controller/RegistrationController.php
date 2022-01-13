@@ -40,6 +40,8 @@ class RegistrationController extends AbstractController
                             $hashedPassword=$passwordHasher->hashPassword($user, $user->getPassword());
                             $user->setPassword($hashedPassword);
 
+                            $user->setRoles(["role" => 'ROLE_USER']);
+
                             $password=$user->getPassword();
                             echo " password= $password";
                             if ($this->checkPassword($password) != true)

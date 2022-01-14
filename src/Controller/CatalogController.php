@@ -14,10 +14,10 @@ use App\Repository\UserRepository;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\AvisType;
+use App\Repository\ContractRepository;
 
 class CatalogController extends AbstractController
 {
-
     #[Route('/catalog', name: 'catalog')]
     public function catalog(CarRepository $carRepository): Response
     {
@@ -27,8 +27,20 @@ class CatalogController extends AbstractController
     }
 
     #[Route('/{id}/show', name: 'catalog_show')]
-    public function showCarAndAvis(Car $car, UserRepository $userRepository , CarRepository $carRepository , AvisRepository $avisRepository , $id, Request $request, EntityManagerInterface $entityManager): Response
+    public function showCarAndAvis(Car $car, ContractRepository $calendar, UserRepository $userRepository , CarRepository $carRepository , AvisRepository $avisRepository , $id, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $events = $calendar->findby(["car"=> $id]);
+        
+        foreach($events as $event){
+            $rdvs[] = [
+                'numeroContrat' => $event->getNumeroContrat(),
+                'debutContrat' => $event->getDebutContrat()->format('Y-m-d'),
+                'finContrat' => $event->getFinContrat()->format('Y-m-d'),
+            ];
+        }
+        $data = json_encode($rdvs);
+        $data2 = json_decode($data);      
+      
         $avis1 = $avisRepository->findBy(['car'=>$id]);
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
@@ -51,7 +63,7 @@ class CatalogController extends AbstractController
             "car" => $car,
             "avisCar"=>$avis1,  
             'avis_form' => $form->createView(),
-            
+            'data' => $data2
         ]);
     }
 }

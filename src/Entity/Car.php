@@ -54,7 +54,7 @@ class Car
     #[ORM\OneToMany(mappedBy: 'car', targetEntity: Avis::class)]
     private $avis;
 
-    #[ORM\OneToOne(inversedBy: 'car', targetEntity: Contract::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'car', targetEntity: Contract::class)]
     private $contract;
 
     public function __construct()
@@ -252,8 +252,9 @@ class Car
 
         return $this;
     }
+
     public function __toString()
     {
-        return $this->id;
+        return (string) $this->id;
     }
 }

@@ -10,6 +10,8 @@
     <img src="../{{car.image}}" style="width: 645px; height:200px;" alt="image de la voiture">
     <button type="submit"><a href="{{ path('reservation', { 'id': car.id }) }}">louer cette voiture</a></button>
 </div>
+<div id="calendar">
+    </div>
 <!-- ajouter un avis -->
 <button class="open-button" onclick="openForm()"><strong>Ajouter un avis</strong></button>
 <div class="form-popup" id="myForm">
@@ -34,4 +36,8 @@
 
 
 
+
+
+    <script> var data = {{ data | json_encode(constant('JSON_PRETTY_PRINT'))| raw }}
+</script>
 {% endblock %}

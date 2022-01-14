@@ -29,39 +29,64 @@ class RegistrationController extends AbstractController
         EntityManagerInterface $entityManager, 
         UserRepository $userRepository, 
         UserPasswordHasherInterface $passwordHasher): Response
-    {  
+        {  
             $user = new User();
             $form = $this->createForm(UserType::class, $user);
             $form->handleRequest($request);
                  if ($form->isSubmitted() && $form->isValid())
-                {   //On vérifie que l'email n'exite pas déjà en base de donnée
+                {
                     if($this->isEmailExist($user->getEmail(), $userRepository)===false)
-                        { 
-                            $user->setRoles(["role" => 'ROLE_USER']);
-                            $password=$user->getPassword();
+                        {
                             $hashedPassword=$passwordHasher->hashPassword($user, $user->getPassword());
                             $user->setPassword($hashedPassword);
-                            $entityManager->persist($user);
-                            $entityManager->flush();
-                                     
-                            return $this->redirectToRoute('index');
-                        }echo 'Il existe déjà un compte associé à cette adresse mail.';
-                  
+
+                            $user->setRoles(["role" => 'ROLE_USER']);
+
+                            $password=$user->getPassword();
+                            echo " password= $password";
+                            if ($this->checkPassword($password) != true)
+                                {
+	                                //echo "le mot de passe n'est pas au format requis. Il doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre.";	
+                                }else{
+                                    $entityManager->persist($user);
+                                    $entityManager->flush();
+                                  
+                                    }  
+                            
+                                    return $this->redirectToRoute('index');
                 
+                        }
+            
+            else{
+                $userEmail=$user->getEmail();
+                // echo " Le compte associé à l'adresse $userEmail existe déjà.";
+            }
         }return $this->render('registration/index.html.twig', [
                 'form' => $form->createView()
             ]); 
-    }
+            }
     
   
 
-     protected function isEmailExist(string $emailUser, UserRepository $userRepository):bool
-    {
+        protected function isEmailExist(string $emailUser, UserRepository $userRepository):bool
+        {
             $databaseEmail=$userRepository->findOneBy(['email' => $emailUser]);
             if(!empty($databaseEmail))
             {
                 return true;
             }return false;
-    }
- 
+        }
+        protected function checkPassword($password)
+            {
+                        $uppercase = preg_match('@[A-Z]@', $password );
+                        $lowercase = preg_match('@[a-z]@', $password);
+                        $number    = preg_match('@[0-9]@', $password);
+
+                    if(!$uppercase || !$lowercase || !$number)
+                        {
+                            return false;
+                        }
+                                return true;
+                                 
+            }
 }

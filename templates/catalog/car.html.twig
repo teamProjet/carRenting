@@ -10,6 +10,18 @@
     <img src="../{{car.image}}" style="width: 645px; height:200px;" alt="image de la voiture">
     <button type="submit"><a href="{{ path('reservation', { 'id': car.id }) }}">louer cette voiture</a></button>
 </div>
+<!-- ajouter un avis -->
+<button class="open-button" onclick="openForm()"><strong>Ajouter un avis</strong></button>
+<div class="form-popup" id="myForm">
+        <form action="" method="POST"> 
+            {{ form_start(avis_form) }}
+                    {{ form_row(avis_form.note)}}
+                    {{ form_row(avis_form.commentaire)}}
+                    <button type="submit">Envoyer</button>
+                    <button type="button" class="btn cancel" onclick="closeForm()">Fermer</button>
+            {{ form_end(avis_form) }}
+        </form>  
+    </div>
 <!-- afficher les avis en rapport avec cette voiture -->
 {% for avi in avisCar %}
 
@@ -19,28 +31,7 @@
 <p style="color: aliceblue;">{{avi.commentaire}}</p>
 
 {% endfor %}
-<form action="" method="POST"> 
-    {{ form_start(avis_form) }}
-            {{ form_row(avis_form.note)}}
-            {{ form_row(avis_form.commentaire)}}
-            <button type="submit">Envoyer</button>
-    {{ form_end(avis_form) }}
 
-</form>  
-
-<div class="login-popup">
-    <div class="form-popup" id="popupForm">
-      <form action="" class="form-container">
-        <h2>Ajouter Un commentaire</h2>
-        {{ form_start(avis_form) }}
-            {{ form_row(avis_form.note)}}
-            {{ form_row(avis_form.commentaire)}}
-            <button type="submit">Envoyer</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Fermer</button>
-        {{ form_end(avis_form) }}
-      </form>
-    </div>
-  </div>
 
 
 {% endblock %}

@@ -114,3 +114,6 @@ justify-content: space-evenly;
     flex-direction: column;
 }
 .noneclasscatalog{display: none;}
+
+.form-popup {
+    display: none;}

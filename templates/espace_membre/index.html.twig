@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
 <h1 class="h1Membre">Bienvenue dans votre espace membre</h1>
 <p class="pMembre">Mes locations</p>
@@ -10,10 +9,7 @@
 <p class="pMembre">Etat du véhicule : {{contract.etatVehicule}}</p>
 <p class="pMembre">Caution : {{contract.caution}}</p>
 <p class="pMembre">Prix de la location : {{contract.prixLocation}}</p>
-
-
 <a href="{{path('supprimer', {'id': contract.id})}}"><button type = "submit"> Supprimer ma réservation</button></a>
-
 <button type = "submit"> Modifier ma réservation</button></br>
 <button type = "submit"> Télécharger mon contrat</button></br>
 {% endfor %}

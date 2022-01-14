@@ -21,7 +21,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     /**
      * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email."
+     *     message = "Veuillez rentrer un email correct."
      * )
      */
      /**
@@ -39,6 +39,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *      minMessage = "Votre mot de passe doit contenir au moins {{ limit }} caractères",
      * )
      */
+  
+    /**
+     * @Assert\Regex(
+     *     pattern="^(?=.[a-z])(?=.[A-Z])(?=.*\d)[a-zA-Z\d]$",
+     *     match=true,
+     *     message="Votre mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre. "
+     * )
+     */
+    
     private $password;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

@@ -34,7 +34,7 @@ class Contract
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'contract')]
     private $user;
 
-    #[ORM\OneToOne(mappedBy: 'contract', targetEntity: Car::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(targetEntity: Car::class, inversedBy: 'contract', cascade: ['persist', 'remove'])]
     private $car;
 
     public function getId(): ?int
@@ -133,18 +133,9 @@ class Contract
 
     public function setCar(?Car $car): self
     {
-        // unset the owning side of the relation if necessary
-        if ($car === null && $this->car !== null) {
-            $this->car->setContract(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($car !== null && $car->getContract() !== $this) {
-            $car->setContract($this);
-        }
-
         $this->car = $car;
 
         return $this;
     }
+
 }

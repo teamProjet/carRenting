@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<div id="calendar">
+    </div>
+
+{{ form_start(form) }}
+{{ form_widget(form.debutContrat) }}
+{{ form_widget(form.finContrat) }}
+<button type='submit'>Réserver</button>
+{{ form_end(form) }}
+
+
+
+{% endblock %}
+

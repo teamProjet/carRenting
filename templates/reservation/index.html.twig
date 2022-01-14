@@ -14,9 +14,4 @@
 
 {{ form_end(form) }}
 
-{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    <p style="color: white">Email: {{ app.user.email }}</p>
-{% endif %}
-{{dump(currentUser)}}
-
 {% endblock %}

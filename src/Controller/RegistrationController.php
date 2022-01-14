@@ -46,7 +46,7 @@ class RegistrationController extends AbstractController
                             echo " password= $password";
                             if ($this->checkPassword($password) != true)
                                 {
-	                                // echo "le mot de passe n'est pas au format requis. Il doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre.";	
+	                                //echo "le mot de passe n'est pas au format requis. Il doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre.";	
                                 }else{
                                     $entityManager->persist($user);
                                     $entityManager->flush();

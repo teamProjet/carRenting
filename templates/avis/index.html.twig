@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AvisController!{% endblock %}
+
+{% block body %}
+
+<form action="" method="POST"> 
+    {{ form_start(avis_form) }}
+            {{ form_row(avis_form.note)}}
+            {{ form_row(avis_form.commentaire)}}
+            <button type="submit">Envoyer</button>
+    {{ form_end(avis_form) }}
+
+</form>  
+{% endblock %}

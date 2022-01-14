@@ -98,6 +98,7 @@ class ReservationController extends AbstractController
             ];
         }
         $data = json_encode($rdvs);
+        $data2 = json_decode($data);
 
         if ($form->isSubmitted() && $form->isValid()){
             $contract->setNumeroContrat(uniqid('ctrnum'));
@@ -113,9 +114,10 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('validation', ['id'=>$id]);
         }
 
+
         return $this->render('reservation/creationContrat.html.twig',  [
             'form' => $form->createView(),
-            //'data' => compact('data'),
+            'data' => $data2,
         ]);   
     }
 

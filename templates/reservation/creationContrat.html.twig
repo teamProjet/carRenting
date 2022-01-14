@@ -10,7 +10,7 @@
 <button type='submit'>Réserver</button>
 {{ form_end(form) }}
 
-
-
+<script> var data = {{ data | json_encode(constant('JSON_PRETTY_PRINT'))| raw }}
+</script>
 {% endblock %}
 

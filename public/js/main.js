@@ -1,10 +1,10 @@
-indow.onload = () => {
+window.onload = () => {
     let calendarElt = document.querySelector("#calendar");
     console.log(data)
 
     var events = []; 
     for(var i =0; i < data.length; i++) 
-    {events.push( {title: "Réservé" , start: data[i]["debut"], end: data[i]["fin"]})}
+    {events.push( {title: "Réservé" , start: data[i]["debutContrat"], end: data[i]["finContrat"]})}
     console.log(events);
 
     let calendar = new FullCalendar.Calendar(calendarElt, {

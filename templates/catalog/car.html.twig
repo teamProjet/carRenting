@@ -9,4 +9,8 @@
     <p>{{car.modele}}</p>
     <img src="../{{car.image}}" style="width: 645px; height:200px;" alt="image de la voiture">
 </div>
+<div id="calendar">
+    </div>
+    <script> var data = {{ data | json_encode(constant('JSON_PRETTY_PRINT'))| raw }}
+</script>
 {% endblock %}

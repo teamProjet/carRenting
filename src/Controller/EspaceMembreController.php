@@ -36,34 +36,31 @@ class EspaceMembreController extends AbstractController
     }
    
     #[Route('/supprimer/{id}', name: 'supprimer')]
-   
+
     public function delete(
         Request $request, 
         EntityManagerInterface $entityManager, 
         SessionInterface $session, 
         ContractRepository $contractRepository, 
-        CarRepository $car, $id, 
+        $id, 
         ):Response
     {
-        
-       $contractRepository=$contractRepository->find($id);
-       $car = $car->findBy(['relation' => $id]);
-       echo $car;
-       $form = $this->createForm(EspaceMembreType::class, $contractRepository);
-        
+        // On cherche l'id du contrat à supprimer
+        $contractRepository=$contractRepository->find($id);
+        //On crée le formulaire avec un bouton annuler ma réservation
+        $form = $this->createForm(EspaceMembreType::class, $contractRepository);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-            
             $entityManager->remove($contractRepository);
             $entityManager->flush();
             $entityManager->persist($contractRepository);
-            return new Response("La location à bien été annulée.");
-        }return $this->render('espace_membre/supprimer.html.twig',[
-            'session'  => $session,
-            'form' => $form->createView(),
-            'contract'=>$contractRepository,
-            'car'=>$car
-            
+            return new Response("La location a bien été annulée.");
+            }
+        return $this->render('espace_membre/supprimer.html.twig',[
+        'session'  => $session,
+        'form' => $form->createView(),
+        'contract'=>$contractRepository,
         ]);
     }
 }
+

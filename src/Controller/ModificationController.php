@@ -5,14 +5,14 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\UserType;
 use App\Form\ModificationType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\User;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
+
 
 
 class ModificationController extends AbstractController
@@ -23,49 +23,45 @@ class ModificationController extends AbstractController
     {
         $this->requestStack = $requestStack;
     }
-    #[Route('/modification{id}', name: 'modification')]
+    #[Route('/modification', name: 'modification')]
     public function modification( Request $request, 
     EntityManagerInterface $entityManager, 
     UserRepository $userRepository, 
-    $email
-   ): Response
+    UserPasswordHasherInterface $passwordHasher
+    ):Response
     {   
-        $user=new User;
-        $userRepository=$userRepository->find($email);
-        
-        $form = $this->createForm(ModificationType::class, $email);
+       
+         //On vérifie que le user est connecté, sinon redirection vers le login
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        $form = $this->createForm(ModificationType::class, $user);
         $form->handleRequest($request);
              if ($form->isSubmitted() && $form->isValid())
             {
+                $password=$user->getPassword();
                 
-                            $password=$user->getPassword();
-                            if ($this->checkPassword($password) != true)
-                                {
-                                    echo "le mot de passe n'est pas au format requis. Il doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre.";	
-                                }else{
-                                    $entityManager->persist($user);
-                                    $entityManager->flush();
-                                    
-                                    }   
-                        }
-                    return $this->render('modification/index.html.twig', [
-                        'form' => $form->createView()
-                        
-                    ]); 
-                }
-        protected function checkPassword($password):bool
-        {
-                    $uppercase = preg_match('@[A-Z]@', $password );
-                    $lowercase = preg_match('@[a-z]@', $password);
-                    $number    = preg_match('@[0-9]@', $password);
+                    //Modifier le mot de passe dans la base de données
+                                $hashedPassword=$passwordHasher->hashPassword($user, $user->getPassword());
+                                $user->setPassword($hashedPassword);
+                                $entityManager->persist($user);
+                                $entityManager->flush();
+                                return new Response("Votre mot de passe a été modifié avec succès.");
+                         
+            }
+                        return $this->render('modification/index.html.twig', [
+                            'form' => $form->createView()
+                            
+                        ]); 
+    }
+    protected function checkPassword($password)
+    {
+        $regex= preg_match("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$^", $password );
 
-                if(!$uppercase || !$lowercase || !$number)
-                    {
-                        return false;
-                    }
-                            return true;
-                             
-        }
-        
-      
+        if(!$regex)
+            {
+                return false;
+            }
+            return true;
+                                 
+    } 
 }

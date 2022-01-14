@@ -15,7 +15,7 @@
 <!-- ajouter un avis -->
 <button class="open-button" onclick="openForm()"><strong>Ajouter un avis</strong></button>
 <div class="form-popup" id="myForm">
-        <form action="" method="POST"> 
+        <form action="{{ path('catalog_show', { 'id': car.id }) }}" method="POST"> 
             {{ form_start(avis_form) }}
                     {{ form_row(avis_form.note)}}
                     {{ form_row(avis_form.commentaire)}}

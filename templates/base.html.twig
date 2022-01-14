@@ -11,8 +11,9 @@
         <link href="{{asset('Css/RegistrationStyle.css')}}" rel="stylesheet">
         <link href="{{asset('Css/memberStyle.css')}}" rel="stylesheet">
         <link href="{{asset('Css/reservationStyle.css')}}" rel="stylesheet">
-        <link href="{{asset('catalog.css')}}" rel="stylesheet">
         <link href="{{asset('css/catalogStyle.css')}}" rel="stylesheet"> 
+        <link href="{{asset('css/avisStyle.css')}}" rel="stylesheet"> 
+        <link href="{{asset('css/espacemembre.css')}}" rel="stylesheet"> 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" integrity="sha256-16PDMvytZTH9heHu9KBPjzrFTaoner60bnABykjNiM0=" crossorigin="anonymous">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -44,7 +45,7 @@
 	<ul class="links">
 		<li><a class="hover-underline-animation" href="{{path('catalog')}}">Nos Véhicules</a></li>
 		<li><a class="hover-underline-animation" href="#">Services</a></li>
-		<li><a class="hover-underline-animation" href="#">Mes Locations</a></li>
+		<li><a class="hover-underline-animation" href="{{path('espace_membre')}}">Mes Locations</a></li>
 		<li><a class="hover-underline-animation" href="#">À Propos</a></li>
 	</ul>
 		

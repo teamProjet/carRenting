@@ -1,15 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<h1>Bienvenue dans votre espace membre</h1>
-<p>Mes locations</p>
+<h1 class="h1Membre">Bienvenue dans votre espace membre</h1>
+<p class="pMembre">Mes locations</p>
 {% for contract in contract %}
-<p>N° contrat :</p>{{contract.numeroContrat}}
-<p>Début de la location :</p>{{contract.debutContrat.format('d/m/Y')}}
-<p>Fin de la location :</p>{{contract.finContrat.format('d/m/Y')}}
-<p>Etat du véhicule :</p>{{contract.etatVehicule}}
-<p>Caution :</p>{{contract.caution}}
-<p>Prix de la location :</p>{{contract.prixLocation}}
-<!--Lien vers le formulaire avec l'id du contrat à supprimer-->
+<p class="pMembre">N° contrat : {{contract.numeroContrat}}</p>
+<p class="pMembre">Début de la location : {{contract.debutContrat.format('d/m/Y')}}</p>
+<p class="pMembre">Fin de la location : {{contract.finContrat.format('d/m/Y')}}</p>
+<p class="pMembre">Etat du véhicule : {{contract.etatVehicule}}</p>
+<p class="pMembre">Caution : {{contract.caution}}</p>
+<p class="pMembre">Prix de la location : {{contract.prixLocation}}</p>
 <a href="{{path('supprimer', {'id': contract.id})}}"><button type = "submit"> Supprimer ma réservation</button></a>
 <button type = "submit"> Modifier ma réservation</button></br>
 <button type = "submit"> Télécharger mon contrat</button></br>

@@ -42,7 +42,6 @@ class EspaceMembreController extends AbstractController
         }
    
     #[Route('/supprimer/{id}', name: 'supprimer')]
-   
         public function delete(
             Request $request, 
             EntityManagerInterface $entityManager, 
@@ -69,3 +68,4 @@ class EspaceMembreController extends AbstractController
             ]);
         }
 }
+

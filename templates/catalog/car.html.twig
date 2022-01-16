@@ -3,41 +3,60 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-<div class="container carContainer">
-    <h1>{{car.marque}} {{car.modele}} {{car.annee}}</h1>
-    <p>{{car.couleur}}</p>
-    <img src="../{{car.image}}" style="width: 645px; height:200px;" alt="image de la voiture">
-    <button class="open-button" type="submit"><a href="{{ path('reservation', { 'id': car.id }) }}"><strong>louer cette voiture</strong></a></button>
+<div class="carContainer">
+
+    <div class="firstCarContainer">
+
+            <h1>{{car.marque}} {{car.modele}} {{car.annee}}</h1>
+            
+        <p>{{car.couleur}}</p>
+
+        <img src="../{{car.image}}" alt="image de la voiture">
+
+        <button class="open-button" type="submit"><a href="{{ path('reservation', { 'id': car.id }) }}">Louer</a></button>
+
+            <div class="form-popup" id="myForm">
+
+                <form action="{{ path('catalog_show', { 'id': car.id }) }}" method="POST"> 
+                    {{ form_start(avis_form) }}
+                            {{ form_row(avis_form.note)}}
+                            {{ form_row(avis_form.commentaire)}}
+                            <button class="boutonSubmit" type="submit">Envoyer</button>
+                    {{ form_end(avis_form) }}
+                </form>
+                    
+            </div>
+
+        </div>
+
+        <div class="divContainer">
+
+            <div class="calendarAvis" id="calendar">
+            </div>
+
+        </div>
 </div>
-<div class="divContainer">
-    <div class="calendarAvis" id="calendar"></div>
-    <div class="form-popup" id="myForm">
-        <form action="{{ path('catalog_show', { 'id': car.id }) }}" method="POST"> 
-            {{ form_start(avis_form) }}
-                    {{ form_row(avis_form.note)}}
-                    {{ form_row(avis_form.commentaire)}}
-                    <button class="boutonSubmit" type="submit">Envoyer</button>
-            {{ form_end(avis_form) }}
-        </form>  
-    </div>
-</div>
+
+
+
 <!-- afficher les avis en rapport avec cette voiture -->
+
 {% for avi in avisCar %}
 <div class="avisListe">
+
     <div>
+
         <p>{{avi.nom}} {{avi.prenom}} envoyé le : {{avi.dateCreation.format('d/m/Y')}}</p>
         <p>a mi la note de :{{avi.note}}</p>
+
     </div>
+
     <p>{{avi.commentaire}}</p>
+
 </div>
 
 
 {% endfor %}
-
-
-
-
-
     <script> var data = {{ data | json_encode(constant('JSON_PRETTY_PRINT'))| raw }}
 </script>
 {% endblock %}

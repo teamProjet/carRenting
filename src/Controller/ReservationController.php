@@ -97,6 +97,7 @@ class ReservationController extends AbstractController
                 'finContrat' => $event->getFinContrat()->format('Y-m-d'),
             ];
         }
+        $rdvs = [] ;
         $data = json_encode($rdvs);
         $data2 = json_decode($data);
 

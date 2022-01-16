@@ -4,6 +4,8 @@
 
 {% block body %}
 
+<div class="fullBody">
+
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
 <div class="resaTop">
@@ -11,6 +13,8 @@
         <button onclick="window.location.href = '{{path('member_page')}}';" class="updateBackBtn2" ><i class="fas fa-arrow-left"></i></button>
 
 </div>
+
+{% for contract in contract %}
 
 <div class="resaContent">
 
@@ -26,24 +30,17 @@
 
         <div class="resaPicContent">
 
-                <h1>Audi RS3 - 2021</h1>
+                <h1>{{contract.car.marque}} {{contract.car.modele}}</h1>
 
-                <h4>Louer le : 03/01/2021 <br> Remis le : 03/03/2021  </h4>
+                <h4>Louer le : {{contract.debutContrat.format('d/m/Y')}} <br> Remis le : {{contract.finContrat.format('d/m/Y')}}  </h4>
 
-                <h4>n° du contrat : 134838040200 </h4>
+                <h4>n° du contrat : {{contract.numeroContrat}} </h4>
 
-                <div class="star">
-                        <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
-                        <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
-                        <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
-                        <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
-                        {# <img src="{{asset("../../Img/starYellow.png")}}" alt="#"> #}
-                        {# <img src="{{asset("../../Img/starGrey.png")}}" alt="#"> #}
-                        {# <img src="{{asset("../../Img/starGrey.png")}}" alt="#"> #}
-                        {# <img src="{{asset("../../Img/starGrey.png")}}" alt="#"> #}
-                        {# <img src="{{asset("../../Img/starGrey.png")}}" alt="#"> #}
-                        <img src="{{asset("../../Img/starGrey.png")}}" alt="#">
-                    </div>
+                <p>Caution : {{contract.caution}}</p>
+
+                <p>Prix de la location : {{contract.prixLocation}} Euros</p>
+
+                
 
         </div>
 
@@ -55,7 +52,7 @@
 
                     <button class="buttonChange">Modifier ma reservation</button>
 
-                    <button class="buttonDelete">Supprimer ma reservation</button>
+                    <a href="{{path('supprimer', {'id': contract.id})}}"><button class="buttonDelete">Supprimer ma reservation</button></a>
 
                 </div>
 
@@ -66,110 +63,10 @@
 
      <br>
 
-<div class="resaCar">
-
-        <div class="resaPic">
-
-                <img src="{{("../Img/rs3.jpg")}}" alt="" >
-
-        </div>
-
-            <div class="resaPicContent">
-
-                <h1>Audi RS3 - 2021</h1>
-
-                <h4>Louer le : 03/01/2021 <br> Remis le : 03/03/2021  </h4>
-
-                <h4>n° du contrat : 134838040200 </h4>
-
-                <div class="star">
-                        <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
-                        <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
-                        <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
-                        <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
-                        {# <img src="{{asset("../../Img/starYellow.png")}}" alt="#"> #}
-                        {# <img src="{{asset("../../Img/starGrey.png")}}" alt="#"> #}
-                        {# <img src="{{asset("../../Img/starGrey.png")}}" alt="#"> #}
-                        {# <img src="{{asset("../../Img/starGrey.png")}}" alt="#"> #}
-                        {# <img src="{{asset("../../Img/starGrey.png")}}" alt="#"> #}
-                        <img src="{{asset("../../Img/starGrey.png")}}" alt="#">
-                    </div>
-
-            </div>
-
-            <div class="genPdf">
-
-                <div class="forBtnPdf">  
-
-                <button class="buttonPdf">Télecharger mon contrat</button>
-
-                <button class="buttonChange">Modifier ma reservation</button>
-
-                <button class="buttonDelete">Supprimer ma reservation</button>
-
-                </div>
-
-            </div>
-        
-        </div>
-
-        <br>
-        
-        <div class="resaCar">
-
-        <div class="resaPic">
-
-                <img src="{{("../Img/rs3.jpg")}}" alt="" >
-
-            </div>
-
-            <div class="resaPicContent">
-
-                <h1>Audi RS3 - 2021</h1>
-
-                <h4>Louer le : 03/01/2021 <br> Remis le : 03/03/2021  </h4>
-
-                <h4>n° du contrat : 134838040200 </h4>
-
-                <div class="star">
-                        <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
-                        <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
-                        <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
-                        <img src="{{asset("../../Img/starYellow.png")}}" alt="#">
-                        {# <img src="{{asset("../../Img/starYellow.png")}}" alt="#"> #}
-                        {# <img src="{{asset("../../Img/starGrey.png")}}" alt="#"> #}
-                        {# <img src="{{asset("../../Img/starGrey.png")}}" alt="#"> #}
-                        {# <img src="{{asset("../../Img/starGrey.png")}}" alt="#"> #}
-                        {# <img src="{{asset("../../Img/starGrey.png")}}" alt="#"> #}
-                        <img src="{{asset("../../Img/starGrey.png")}}" alt="#">
-                    </div>
-
-            </div>
-
-            <div class="genPdf">
-
-                <div class="forBtnPdf">  
-
-                <button class="buttonPdf">Télecharger mon contrat</button>
-
-                <button class="buttonChange">Modifier ma reservation</button>
-
-                <button class="buttonDelete">Supprimer ma reservation</button>
-
-                </div>
-
-            </div>
-
+{% endfor %}
 
 </div>
 
-        <br>
-        
-
-        
-    <div class="resModSupp">
-
-    </div>
 
     <script src="{{asset('Script/script.js')}}" type="text/javascript"></script>
 

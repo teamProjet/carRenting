@@ -1,9 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1 class="h1Membre">Bienvenue dans votre espace membre</h1>
-<p class="pMembre">Etes-vous sûr de vouloir annuler la location {{contract.numeroContrat}}?</p>
-{{form(form)}}
-<a href="{{path('espace_membre')}}"><button>Retour vers mon espace membre</button></a>
+
+
+    <div class="resaTop">
+
+        <button onclick="window.location.href = '{{path('member_page')}}';" class="updateBackBtn2" ><i class="fas fa-arrow-left"></i></button>
+
+    </div>
+
+<div class="comfirmDelete">
+
+    <div class="deleteBox">
+
+    <p class="deleteText">Etes-vous sûr de vouloir annuler la location n° <span class="spanColor">{{contract.numeroContrat}}</span>?</p>
+    {{form(form)}}
+
+    </div>
+
+</div>
 
 {% endblock %}

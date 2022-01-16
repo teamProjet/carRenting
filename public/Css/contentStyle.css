@@ -181,6 +181,9 @@ form {
     width: 300px;
     background-color: #1F2124;
     border-radius: 10px;
+    color: white;
+    text-align: center;
+    padding: 15px;
 }
 
 .card1:hover , .card2:hover , .card3:hover{
@@ -206,7 +209,7 @@ form {
     margin : auto;
     position: relative;
     padding:10px;
-    top: 260px;
+    top: 0px;
     background-color: #0AC4FF;
     border: 1px solid #0AC4FF;
 }

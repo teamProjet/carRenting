@@ -13,7 +13,9 @@
         <link href="{{asset('Css/reservationStyle.css')}}" rel="stylesheet">
         <link href="{{asset('css/catalogStyle.css')}}" rel="stylesheet"> 
         <link href="{{asset('css/avisStyle.css')}}" rel="stylesheet"> 
-        <link href="{{asset('css/espacemembre.css')}}" rel="stylesheet"> 
+        <link href="{{asset('css/espacemembre.css')}}" rel="stylesheet">
+        <link href="{{asset('css/contractStyle.css')}}" rel="stylesheet">  
+        <link href="{{asset('css/serveStyle.css')}}" rel="stylesheet"> 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" integrity="sha256-16PDMvytZTH9heHu9KBPjzrFTaoner60bnABykjNiM0=" crossorigin="anonymous">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -32,10 +34,7 @@
 	
 	<div class="logo">
     <a class="aLogo"href="{{path('index')}}">
-		<img id="logo" src="{{asset("Img/logo.png")}}">
-        <img id="logoName" src="{{asset("Img/logoName.png")}}">
-        <div class="weel">
-         </div>
+		<img id="logo" src="{{asset("Img/fullLogo.png")}}">
     <a>
 	</div>
 
@@ -44,8 +43,11 @@
 	
 	<ul class="links">
 		<li><a class="hover-underline-animation" href="{{path('catalog')}}">Nos Véhicules</a></li>
-		<li><a class="hover-underline-animation" href="#">Services</a></li>
-		<li><a class="hover-underline-animation" href="{{path('espace_membre')}}">Mes Locations</a></li>
+		<li><a class="hover-underline-animation" href="{{path('service')}}">Services</a></li>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<li><a class="hover-underline-animation" href="{{path('memberReservation_page')}}">Mes Locations</a></li>
+         {% else %}
+         {% endif %}
 		<li><a class="hover-underline-animation" href="#">À Propos</a></li>
 	</ul>
 		

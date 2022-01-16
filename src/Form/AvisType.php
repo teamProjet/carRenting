@@ -15,8 +15,14 @@ class AvisType extends AbstractType
         $builder
             // ->add('nom', null,)
             // ->add('prenom', null,)
-            ->add('note', null,['attr' => ['placeholder' => 'donner une note']],)
-            ->add('commentaire', null,['attr' => ['placeholder' => 'ecrire votre commentaire']],)
+            ->add('note', null,['attr' => [
+                'placeholder' => 'donner une note',
+                'class' => 'noteForm'
+                ]],)
+            ->add('commentaire', null,['attr' => [
+                'placeholder' => 'ecrire votre commentaire',
+                'class' => 'commentForm',
+                ]],)
             // ->add('dateCreation', DateTimeType::class, array('input' => 'datetime_immutable',))
             // ->add('user')
             // ->add('car')

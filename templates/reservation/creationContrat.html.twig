@@ -1,14 +1,24 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
-<div id="calendar">
+<div class="allCalendar">
+
+<div id="calendar" class="calendarLeft">
     </div>
 
+<div class="formCalendar">   
+
 {{ form_start(form) }}
+<p class="debutContrat">Début du contrat</p>
 {{ form_widget(form.debutContrat) }}
+<p class="debutContrat">Fin du contrat</p>
 {{ form_widget(form.finContrat) }}
 <button type='submit'>Réserver</button>
 {{ form_end(form) }}
+
+</div>
+
+</div>
 
 <script> var data = {{ data | json_encode(constant('JSON_PRETTY_PRINT'))| raw }}
 </script>

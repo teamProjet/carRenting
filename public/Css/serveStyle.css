@@ -1,0 +1,41 @@
+.servAll{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-image: url('../Img/backgroundImage.jpg');
+    background-repeat: no-repeat;
+    background-position-x: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.formule{
+    border: 3px solid rgba(255, 255, 255, 0.398);
+    text-align: center;
+    color: white;
+    background-color: #111211;
+    padding: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.formule:hover{
+    border: 3px solid white;
+}
+
+.spanColor{
+    color:#0AC4FF;
+}
+
+.spanLittle{
+    border-bottom: 1px solid #0AC4FF ;
+    font-size: 11px;
+}
+
+.formule h2{
+    color:#0AC4FF;
+}
+

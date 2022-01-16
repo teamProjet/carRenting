@@ -18,7 +18,7 @@
 <a href="{{path('login')}}" id="lienCo">Vous avez déjà un compte ? Se connecter</a>
 <br>
 <br>
-<button class="formBtn" type='submit'>Inscription</button>
+<button onclick="window.location.href = '{{path('login')}}';" class="formBtn" type='submit'>Inscription</button>
 {{ form_end(form) }}
 
 

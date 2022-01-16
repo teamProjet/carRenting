@@ -62,65 +62,35 @@
 
 <div class="homePageCard">
 
+        {% for car in cars |slice(0, 4)%}
+
         <div class="Card">
                 <div class="imgCard">
+                <a href="{{path('catalog_show', { 'id': car.id } )}}">
                         <img alt="audiRs3" src="../Img/rs3.jpg" id="imgCard">
-                        <p>Audi RS3</p>
+                </a>
+                        <p>{{car.marque}} {{car.modele}}</p>
                 </div>
         </div>
 
-         <div class="Card">
-                <div class="imgCard">
-                        <img alt="audiRs3" src="../Img/rs3.jpg" id="imgCard">
-                        <p>Audi RS3</p>
-                </div> 
-        </div>
-
-         <div class="Card">
-                <div class="imgCard">
-                        <img alt="audiRs3" src="../Img/rs3.jpg" id="imgCard">
-                        <p>Audi RS3</p>
-                </div>
-        </div>
-
-         <div class="Card">
-                <div class="imgCard">
-                        <img alt="audiRs3" src="../Img/rs3.jpg" id="imgCard">
-                        <p>Audi RS3</p>
-                </div>
-        </div>
+        {% endfor %}
 
 </div>
 
 <div class="homePageCard2">
 
+        {% for car in cars |slice(10, 4)%}
+
         <div class="Card">
                 <div class="imgCard">
-                        <img alt="audiRs3" src="../Img/meganeRs.jpg" id="imgCard">
-                        <p>Renault Megane RS</p>
+                <a href="{{path('catalog_show', { 'id': car.id } )}}">
+                        <img alt="audiRs3" src="../Img/rs3.jpg" id="imgCard">
+                </a>
+                        <p>{{car.marque}} {{car.modele}}</p>
                 </div>
         </div>
 
-         <div class="Card">
-                <div class="imgCard">
-                        <img alt="audiRs3" src="../Img/meganeRs.jpg" id="imgCard">
-                        <p>Renault Megane RS</p>
-                </div> 
-        </div>
-
-         <div class="Card">
-                <div class="imgCard">
-                        <img alt="audiRs3" src="../Img/meganeRs.jpg" id="imgCard">
-                        <p>Renault Megane RS</p>
-                </div>
-        </div>
-
-         <div class="Card">
-                <div class="imgCard">
-                        <img alt="audiRs3" src="../Img/meganeRs.jpg" id="imgCard">
-                        <p>Renault Megane RS</p>
-                </div>
-        </div>
+        {% endfor %}
 
 </div>
 
@@ -131,7 +101,13 @@
                 <h2 class="cardTitle">72 Mois</h2>
                 <hr class="borderTitle">
 
-                <button class="btnCard">En savoir plus</button>
+                <h4>Pourquoi souscrire un contrat de leasing sur 72 mois ?</h4>
+
+                <p class="formuleText">  
+                Selon les cas, la durée de location s’étale de <span class="spanColor"> 24 à 48 mois </span>, mais elle peut courir au-delà, <span class="spanColor">à 72 mois</span>.<br>
+                A cette durée sont associés des plafonds de kilométrage qui ne peuvent être dépassés sans pénalités<br><br>
+
+                <button class="btnCard" onclick="window.location.href = '{{path('service')}}';" >En savoir plus</button>
         </div>
 
         <div class="card2">
@@ -139,7 +115,13 @@
                 <h2 class="cardTitle">2 ans</h2>
                 <hr class="borderTitle">
 
-                <button class="btnCard">En savoir plus</button>
+                <h4>Pourquoi souscrire un contrat de leasing sur 2 ans ?</h4>
+
+                <p class="formuleText">  
+                Selon les cas, la durée de location s’étale de <span class="spanColor"> 24 à 48 mois </span>, mais elle peut courir au-delà, <span class="spanColor">à 2 Ans</span>.<br>
+                A cette durée sont associés des plafonds de kilométrage qui ne peuvent être dépassés sans pénalités<br><br>
+
+                <button class="btnCard" onclick="window.location.href = '{{path('service')}}';" >En savoir plus</button>
         </div>
 
         <div class="card3">
@@ -147,7 +129,13 @@
                 <h2 class="cardTitle">4 ans et +</h2>
                 <hr class="borderTitle">
 
-                <button class="btnCard">En savoir plus</button>
+                <h4>Pourquoi souscrire un contrat de leasing sur 4 ans ?</h4>
+
+                <p class="formuleText">  
+                Selon les cas, la durée de location s’étale de <span class="spanColor"> 24 à 48 mois </span>, mais elle peut courir au-delà, <span class="spanColor">à 4 ans</span>.<br>
+                A cette durée sont associés des plafonds de kilométrage qui ne peuvent être dépassés sans pénalités<br><br>
+
+                <button class="btnCard" onclick="window.location.href = '{{path('service')}}';" >En savoir plus</button>
         </div>
 
 </div>

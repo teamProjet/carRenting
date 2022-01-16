@@ -59,7 +59,8 @@ class EspaceMembreController extends AbstractController
                 $entityManager->remove($contractRepository);
                 $entityManager->flush();
                 $entityManager->persist($contractRepository);
-                return new Response("La location à bien été annulée.");
+                // return new Response("La location à bien été annulée.");
+                return $this->redirectToRoute('validationDelete');
                 }
             return $this->render('espace_membre/supprimer.html.twig',[
             'session'  => $session,
@@ -67,5 +68,13 @@ class EspaceMembreController extends AbstractController
             'contract'=>$contractRepository,
             ]);
         }
+
+        #[Route('/validationDelete', name: 'validationDelete')]
+    public function validationDelete(): Response
+    {
+        return $this->render('espace_membre/validationDelete.html.twig', [
+            'controller_name' => 'zzz',
+        ]);
+    }
 }
 

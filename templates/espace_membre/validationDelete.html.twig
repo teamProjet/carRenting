@@ -1,8 +1,18 @@
 {% extends 'base.html.twig' %}
+
 {% block body %}
 
 
-<div class="printContract">
+    <div class="resaTop">
+
+        <button onclick="window.location.href = '{{path('member_page')}}';" class="updateBackBtn2" ><i class="fas fa-arrow-left"></i></button>
+
+    </div>
+
+<div class="comfirmDelete">
+    <div>
+
+ <div class="printContract">
 
     <div>
 
@@ -44,32 +54,14 @@
     </div>
 
 
-    <p class="contentContract">
-
-        Vous venez de valider une reservation sous l'identifiant <span class="spanColor">{{contract.user.email}}</span>
-
-        <br>
-        <br>
-
-        Votre numéro de contrat est le : <span class="spanColor">{{contract.numeroContrat}}</span>
-
-        <br>
-        <br>
-
-        Location de la <span class="spanColor">{{contract.car.marque}} {{contract.car.modele}} </span>du <span class="spanColor"> {{contract.debutContrat|date('d-m-Y')}}</span> au <span class="spanColor">{{contract.finContrat|date('d-m-Y')}}</span>
-
-        <br>
-        <br>
-
-        Prix location : <span class="spanColor">{{contract.prixLocation}}</span> Euros
-    </p>
-
-    <br>
-
+    <p class="contentContract"> <span class="spanColor"> Votre location a était annulée</span></p>
 
 </form>
 
 </div>
 
+    </div>
+
+</div>
 
 {% endblock %}

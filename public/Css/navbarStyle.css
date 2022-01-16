@@ -42,7 +42,7 @@ ul {
 }
 
 .logo{
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 #logo{
@@ -259,7 +259,11 @@ ul {
     left: 0;
   }
   .navbar.collapsed .links a {
+    margin-top: 20px;
     color: #fff;
+    font-size: 12px;
+    text-align: center;
+    margin-left: -10px;
   }
   .navbar.collapsed .links li {
     width: 100%;
@@ -284,9 +288,9 @@ ul {
   }
 
   .navbar.sticky {
-    position: fixed;
     z-index: 40;
   }
+
 
   .navbarBtn:hover {
     cursor: pointer;

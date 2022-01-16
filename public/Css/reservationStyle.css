@@ -1,6 +1,8 @@
 .resa{
     width: 100%;
     background-color: black;
+    height: 600px;
+
 }
 
 .resaTop{
@@ -36,6 +38,7 @@
 .resaContent{
     width: 100%;
     background-color: white;
+    
 }
 
 .resaCar{
@@ -146,4 +149,60 @@
     0 0 70px red;
     box-sizing: border-box;
     transition: 0.5s;
+}
+
+.comfirmDelete{
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../Img/backgroundImage.jpg');
+    background-repeat: no-repeat;
+    background-position-x: center;
+}
+
+.deleteText{
+    color: white;
+    text-align: center;
+}
+
+#espace_membre_Annuler{
+    width: 400px;
+}
+
+#espace_membre_Annuler{
+    width: 400px;
+    margin-top : 10px;
+    position: relative;
+    padding:10px;
+    background-color: white;
+    border: 1px solid white;
+    color:red;
+}
+
+#espace_membre_Annuler:hover{
+    cursor: pointer;
+    box-shadow: 
+    0 0 10px red,
+    0 0 30px red,
+    0 0 70px red;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+
+.deleteBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #111211;  
+    border: 1px solid rgba(255, 255, 255, 0.747);
+    border-radius: 10px; 
+    width: 40%;
+    height: 400px;
+}
+
+.contentContract{
+    font-size: 18px;
+    text-align: center;
 }

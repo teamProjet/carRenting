@@ -3,9 +3,43 @@
 {% block title %}Hello CatalogController!{% endblock %}
 
 {% block body %}
-<input type="search" onkeyup="search_car()" name="search" id="searchbar" placeholder="Search cars..">
+<div class="search">
+
+    <input onkeyup="search_car()" name="search" id="searchbar" placeholder="Rechercher">
+
+</div>
+
 <div class="container_catalog">
-    {% for car in cars %}
+
+
+
+    <div class="carContCat">
+
+{% for car in cars %}
+
+        <div class="carPic">
+
+        <h3 class="h3_catalog">{{car.marque}} {{car.modele}}</h3>
+
+                <img src="{{car.image}}" alt="image de la voiture">
+
+        <a href="{{path('catalog_show', { 'id': car.id } )}}">  
+
+        <button class="btnMoreCar">Voir plus</button>
+
+        </a>
+
+        </div>
+
+{% endfor %}
+
+    </div>
+
+
+
+
+
+    {# {% for car in cars %}
     <div class="card card_catalog">
         <div class="card-body catalog_contentBx">
             <h3 class="card-title h3_catalog">{{car.marque}} {{car.modele}}</h3>
@@ -14,7 +48,7 @@
         </div>
         <img src="{{car.image}}" style="width: 645px; height:200px;" alt="image de la voiture">
     </div>
-    {% endfor %}
+    {% endfor %} #}
 </div>
 {% endblock %}
 

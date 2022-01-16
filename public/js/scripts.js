@@ -5,7 +5,7 @@ function search_car() {
     input=input.toLowerCase();
     let x = document.getElementsByClassName('h3_catalog');
 
-	let z = document.getElementsByClassName('card_catalog');
+	let z = document.getElementsByClassName('carPic');
       
     for (i = 0; i < x.length; i++) { console.log(x.length);
         

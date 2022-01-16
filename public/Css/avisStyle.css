@@ -1,37 +1,219 @@
-.divContainer{background-color: white;display: flex;}
+.carContainer{
+    background-image: url('../Img/backgroundImage.jpg');
+    background-repeat:repeat-y;
+    background-position-x: center;
+    height:max-content;    
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+    color:white;
+}
+
+.divContainer{
+    width: 40%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carContainer img {
+    width: 60%;
+    height: 350px;
+}
+
+.noteForm{
+    width: 100%;
+    text-align: center;
+}
+
+.commentForm{
+    width: 100%;
+    text-align: center;
+    height: 100px;
+}
+
+.firstCarContainer{
+    display: flex;
+    flex-direction:column ;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+
+.open-button{
+    width: 50%;
+    display: block;
+    position: relative;
+    padding:5px;
+    top: 0px;
+    background-color: #0AC4FF;
+    border: 1px solid #0AC4FF;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.open-button:hover{
+    cursor: pointer;
+    box-shadow: 
+    0 0 10px #0AC4FF,
+    0 0 30px #0AC4FF,
+    0 0 70px #0AC4FF;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+
+
 .calendarAvis{
     background-color: lightgrey;
     color: grey;
-    padding: 2%;
-    width: 50%;
+    padding: 30px;
+    width: 100%;
+    box-shadow: 0px 4px 40px 4px rgba(128, 128, 128, 0.521);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    color: white;
+    background-color: #111211 !important;
+    border-radius: 10px;
+
 }
-.open-button a{text-decoration: none;color: black;}
+
+.calendarAvis button, .fc-toolbar-chunk button{
+    background-color: #0AC4FF !important;
+    color: black !important;
+}
+
+.calendarAvis button, .fc-toolbar-chunk button:hover{
+    cursor: pointer;
+    box-shadow: 
+    0 0 10px #0AC4FF,
+    0 0 30px #0AC4FF,
+    0 0 70px #0AC4FF;
+    box-sizing: border-box;
+    transition: 0.5s;
+    border: 1px solid #0AC4FF !important;
+}
+
+.fc-view-harness, .fc-daygrid-day-frame{
+    border: 1px solid black;
+    color: black;
+}
+
+.fc-scrollgrid-sync-inner a{
+    color: white;
+}
+
+.fc-daygrid-day-frame:hover{
+    background-color: white;
+}
+
+.calendarAvis h2, .fc-toolbar-title{
+    color: white;
+    text-transform: capitalize;
+}
+
+.open-button a{
+    text-decoration: none;
+    color: black;
+}
 .form-popup{
     display: block;
     border-radius: 10px;
-    height: 30vh;
+    height: 35vh;
     align-self: center;
     justify-content: center;
     background-color: #09161d;
     box-shadow: 0px 4px 40px 4px grey;
     color: white;
     padding: 2%;
-    width: 30%;
+    width: 80%;
     margin: auto;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 }
-/* .form-popup form div label{display: none;} */
-.form-popup form{margin: auto;}
-.form-popup form div label{width: 15vw;}
-.form-popup form div{margin: auto; display: flex;flex-direction: column;justify-content: center;}
-.form-popup form div input,.form-popup form div textarea{width: 15vw}
-.form-popup form{display: flex;justify-content: center;flex-direction: column;}
-.boutonSubmit{width: 15vw;margin: auto;}
 
+.boutonSubmit{
+    width: 50%;
+    display: block;
+    padding:5px;
+    background-color: #0AC4FF;
+    border: 1px solid #0AC4FF;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
 
-.avisListe{display: flex;flex-direction: column;background-color: white;width: 90vw;margin: auto;margin-bottom: 1vw;margin-top: 1vw;}
-.carContainer{background-color: white; color: #09161d;}
-.carContainer h1{color: #09161d;}
+.boutonSubmit:hover{
+    cursor: pointer;
+    box-shadow: 
+    0 0 10px #0AC4FF,
+    0 0 30px #0AC4FF,
+    0 0 70px #0AC4FF;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+
+.allCalendar{
+    display: flex;
+    justify-content: space-between;
+}
+
+.calendarLeft{
+    background-color: black;
+    width: 50%;
+}
+
+.formCalendar{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.fc-daygrid-day-number{
+    color:white;
+}
+
+#contract_debutContrat_date select, #contract_finContrat_date select,
+ #contract_debutContrat_time select, #contract_finContrat_time select{
+    margin-left:35px;
+    border:1px solid #d7d7d7;
+    border-radius:2px;
+    width: 60%;
+}
+select:hover{
+    background:#cde4f7;
+    border:1px solid #41c9ff;
+}
+
+.debutContrat{
+    color: white;
+    margin-left: 30px;
+}
+
+.formCalendar button{
+    width: 50%;
+    display: block;
+    padding:5px;
+    background-color: #0AC4FF;
+    border: 1px solid #0AC4FF;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 85px;
+}
+
+.formCalendar button:hover{
+    cursor: pointer;
+    box-shadow: 
+    0 0 10px #0AC4FF,
+    0 0 30px #0AC4FF,
+    0 0 70px #0AC4FF;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+
+.calendarAvis{
+  
+}

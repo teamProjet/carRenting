@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
+<div class="reservation">
+<h1>Completer mon profil</h1>
 {{ form_start(form) }}
 {{ form_row(form.nom) }}
 {{ form_row(form.prenom) }}
@@ -10,8 +12,9 @@
 {{ form_row(form.ville) }}
 {{ form_row(form.numeroPortable) }}
 {{ form_row(form.numeroPermisConduire) }}
-<button type='submit'>Réserver</button>
-
+<br>
+<button type='submit'>Completer mon profil</button>
 {{ form_end(form) }}
+</div>
 
 {% endblock %}

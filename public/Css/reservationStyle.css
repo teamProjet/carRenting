@@ -5,6 +5,11 @@
 
 }
 
+.reservation{
+    color:white;
+    text-align: center;
+}
+
 .resaTop{
     display: flex;
     flex-direction: row;

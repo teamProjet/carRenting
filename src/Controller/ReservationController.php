@@ -36,24 +36,16 @@ class ReservationController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
-        if($user->getNom())
+        if(empty($user->getNom()))
         {
             $form = $this->createForm(ReservationType::class, $user);
             $form->handleRequest($request);
             
                 if ($form->isSubmitted() && $form->isValid())
                 {
-                    if($this->checkNumberPhone($request->get('numeroPortable'))===false){
-                        echo "le numéro de téléphone renseigné n'est pas correct.";
-                    }elseif($this->checkNumberPermis($request->get('numeroPermisConduire')===false)){
-                        echo"Le numéro de permis renseigné n'est pas valide";
-                    }elseif($this->checkPostalCode($request->get('codePostal'))===false){
-                        echo"Merci de renseigner un code postal valide";
-                    }else{
-                        $entityManager->persist($user);
-                        $entityManager->flush();
-                        return $this->redirectToRoute('creationContrat', ['id'=>$id]);
-                    }  
+                    $entityManager->persist($user);
+                    $entityManager->flush();
+                    return $this->redirectToRoute('creationContrat', ['id'=>$id]);
                 }
                 return $this->render('reservation/index.html.twig', [
                     'form' => $form->createView(),
